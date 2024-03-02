@@ -1,7 +1,10 @@
 {
+    "[c]": {
+        "editor.defaultFormatter": "keyhr.42-c-format"
+    },
     "c-cpp-compile-run.c-compiler": "C:\\TDM-GCC-64\\bin\\gcc.exe",
     "c-cpp-compile-run.cpp-compiler": "C:\\TDM-GCC-64\\bin\\gcc.exe",
     "cSpell.words": [
         "putnbr"
-    ]
+    ],
 }

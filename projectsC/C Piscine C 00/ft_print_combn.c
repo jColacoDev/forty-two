@@ -8,7 +8,7 @@ void ft_putnbr(int n);
 
 int main() {
     int n_floor = 1,
-        n_roof = 9,
+    n_roof = 9,
         digit_floor = 0,
         digit_roof = 9;
 
