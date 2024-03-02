@@ -51,7 +51,6 @@ void generate_combinations(int *counter, int data[], int start, int end, int ind
     }
 }
 
-
 void print_combinations(int data[], int n, int *first) {
     char buffer[20];
     int buffer_index = 0;
