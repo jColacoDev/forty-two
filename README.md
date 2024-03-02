@@ -5,4 +5,5 @@ Below is a list of projects and exercises available in this repository:
 
 ## Table of Contents
 
-1. [C Piscine C 00](#ProjectsC/c-piscine-c-00)
+1. [ProjectsC](#projectsc)
+    - [C Piscine C 00](#c-piscine-c-00)
