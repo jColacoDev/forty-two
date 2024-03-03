@@ -41,17 +41,28 @@ void rush(int x, int y, int rush){
 
     switch (rush){
         case 0:
+            edges[0] = 'o';
+            edges[1] = 'o';
+            edges[2] = 'o';
+            edges[3] = 'o';
+
+            fillers[0] = ' ';
+            fillers[1] = '|';
+            fillers[2] = '-';
+            
+            break;
+        case 1:
             edges[0] = '/';
             edges[1] = '\\';
-            edges[2] = '/';
-            edges[3] = '\\';
+            edges[2] = '\\';
+            edges[3] = '/';
 
             fillers[0] = ' ';
             fillers[1] = '*';
             fillers[2] = '*';
             
             break;
-        case 1:
+        case 2:
             edges[0] = 'A';
             edges[1] = 'A';
             edges[2] = 'C';
@@ -63,7 +74,7 @@ void rush(int x, int y, int rush){
             
             break;
         
-        case 2:
+        case 3:
             edges[0] = 'A';
             edges[1] = 'C';
             edges[2] = 'A';
@@ -72,10 +83,9 @@ void rush(int x, int y, int rush){
             fillers[0] = ' ';
             fillers[1] = 'B';
             fillers[2] = 'B';
-
             break;
-        
-        case 3:
+
+        case 4:
             edges[0] = 'A';
             edges[1] = 'C';
             edges[2] = 'C';
@@ -84,7 +94,6 @@ void rush(int x, int y, int rush){
             fillers[0] = ' ';
             fillers[1] = 'B';
             fillers[2] = 'B';
-
             break;
         
         default:
@@ -92,4 +101,40 @@ void rush(int x, int y, int rush){
     }
 
      drawY(x, y, edges, fillers);
+}
+
+int checkInputArgs(int argc, char *argv[]){
+    if (argc != 4) {
+        ft_putstr("Usage: ");
+        ft_putstr(argv[0]);
+        ft_putstr(" <rush_n>");
+        ft_putstr(" < x >");
+        ft_putstr(" < y >\n");
+        return 1;
+    }
+
+    char *arg = argv[1];
+    if (*arg >= '0' && *arg <= '4' && *(arg + 1) == '\0') {
+        ft_putstr("I wanna be the very best\n");
+    } else {
+        ft_putstr("Invalid value for rush_n. Please enter a value between 0 and 4.\n");
+        return 1;
+    }
+    arg = argv[2];
+    if (*arg >= '1') {
+        ft_putstr("Like no one ever was\n");
+    } else {
+        ft_putstr("Invalid value for rush_x. Please enter a value between 0 and infinity!.\n");
+        return 1;
+    }
+    arg = argv[3];
+    if (*arg >= '1') {
+        ft_putstr("To catch them is my real test\n");
+        ft_putstr("To train them is my cause\n");
+    } else {
+        ft_putstr("Invalid value for rush_y. Please enter a value between 0 and infinity!.\n");
+        return 1;
+    }
+
+    return 0;
 }
