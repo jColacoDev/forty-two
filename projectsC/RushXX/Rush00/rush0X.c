@@ -105,11 +105,7 @@ void rush(int x, int y, int rush){
 
 int checkInputArgs(int argc, char *argv[]){
     if (argc != 4) {
-        ft_putstr("Usage: ");
-        ft_putstr(argv[0]);
-        ft_putstr(" <rush_n>");
-        ft_putstr(" < x >");
-        ft_putstr(" < y >\n");
+        ft_putstr("Usage: main.exe <rush_n>  < x > < y >\n");
         return 1;
     }
 
