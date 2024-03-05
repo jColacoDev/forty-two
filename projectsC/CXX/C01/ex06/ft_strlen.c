@@ -1,11 +1,24 @@
-int ft_strlen(char *str){
-    int count = 0;
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joao-rde <joao-rde@student.42.com>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/05 05:08:46 by joao-rde          #+#    #+#             */
+/*   Updated: 2024/03/05 05:08:46 by joao-rde         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-    while (*str) {
-        count++;
-        str++;
-    }
+int	ft_strlen(char *str)
+{
+	int	count;
 
-    return count;
+	count = 0;
+	while (*str)
+	{
+		count++;
+		str++;
+	}
+	return (count);
 }
-

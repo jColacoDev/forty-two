@@ -1,31 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_alphabet.c                                :+:      :+:    :+:   */
+/*   smt.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joao-rde <joao-rde@student.42.com>         +#+  +:+       +#+        */
+/*   By: joao-rde <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/05 02:52:22 by joao-rde          #+#    #+#             */
-/*   Updated: 2024/03/05 02:52:22 by joao-rde         ###   ########.fr       */
+/*   Created: 2024/03/05 01:43:43 by joao-rde          #+#    #+#             */
+/*   Updated: 2024/03/05 01:43:43 by joao-rde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
-void	print_alphabet(void)
+int main()
 {
-	char	c;
-
-	c = 'a';
-	while (c <= 'z' )
-	{
-		write(1, &c, 1);
-		c++;
-	}
-}
-
-int	main(void)
-{
-	print_alphabet();
-	return (0);
+  
+ int i = 0;
+   return 0;
 }

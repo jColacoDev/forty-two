@@ -1,12 +1,35 @@
-void ft_sort_int_tab(int *tab, int size) {
-    int i, j;
-    for (i = 0; i < size - 1; i++) {
-        for (j = 0; j < size - i - 1; j++) {
-            if (tab[j] > tab[j + 1]) {
-                int temp = tab[j];
-                tab[j] = tab[j + 1];
-                tab[j + 1] = temp;
-            }
-        }
-    }
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_sort_int_tab.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joao-rde <joao-rde@student.42.com>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/05 05:15:34 by joao-rde          #+#    #+#             */
+/*   Updated: 2024/03/05 05:15:34 by joao-rde         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+void	ft_sort_int_tab(int *tab, int size)
+{
+	int	i;
+	int	j;
+	int	temp;
+
+	i = 0;
+	while (i < size - 1)
+	{
+		j = 0;
+		while (j < size - i - 1)
+		{
+			if (tab[j] > tab[j + 1])
+			{
+				temp = tab[j];
+				tab[j] = tab[j + 1];
+				tab[j + 1] = temp;
+			}
+			j++;
+		}
+		i++;
+	}
 }
