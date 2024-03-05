@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_numbers.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joao-rde <joao-rde@student.42.com>         +#+  +:+       +#+        */
+/*   By: joao-rde <joao-rde@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 03:07:37 by joao-rde          #+#    #+#             */
-/*   Updated: 2024/03/05 03:07:37 by joao-rde         ###   ########.fr       */
+/*   Updated: 2024/03/05 17:17:00 by joao-rde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_print_numbers(void)
 	char	digit;
 
 	digit = '0';
-	while (digit <= '9' )
+	while (digit <= '9')
 	{
 		write(1, &digit, 1);
 		digit++;
