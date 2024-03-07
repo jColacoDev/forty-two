@@ -3,20 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_comb2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joao-rde <joao-rde@student.42.com>         +#+  +:+       +#+        */
+/*   By: joao-rde <joao-rde@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/05 03:47:43 by joao-rde          #+#    #+#             */
-/*   Updated: 2024/03/05 03:47:43 by joao-rde         ###   ########.fr       */
+/*   Created: 2024/03/05 16:30:25 by joao-rde          #+#    #+#             */
+/*   Updated: 2024/03/07 15:41:35 by joao-rde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void	ft_print_comb2(void)
+void	ft_print(int i, int j)
 {
 	char	buffer[5];
-	int		i;
-	int		j;
+
+	buffer[0] = i / 10 + '0';
+	buffer[1] = i % 10 + '0';
+	buffer[2] = ' ';
+	buffer[3] = j / 10 + '0';
+	buffer[4] = j % 10 + '0';
+	write(1, buffer, 5);
+	if (!(i == 98 && j == 99))
+	{
+		write(1, ", ", 2);
+	}
+}
+
+void	ft_print_comb2(void)
+{
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < 100)
@@ -26,23 +41,18 @@ void	ft_print_comb2(void)
 		{
 			if (i != j)
 			{
-				buffer[0] = i / 10 + '0';
-				buffer[1] = i % 10 + '0';
-				buffer[2] = ' ';
-				buffer[3] = j / 10 + '0';
-				buffer[4] = j % 10 + '0';
-				write(1, buffer, 5);
-				if (!(i == 98 && j == 99))
-				{
-					write(1, ",", 1);
-				}
+				ft_print(i, j);
 			}
+			j++;
 		}
+		i++;
 	}
 }
 
+/*
 int	main(void)
 {
 	ft_print_comb2();
 	return (0);
 }
+*/
