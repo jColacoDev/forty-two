@@ -10,7 +10,9 @@
     ],
     "files.associations": {
         "stdio.h": "c",
-        "unistd.h": "c"
+        "unistd.h": "c",
+        "sky_scrappers.h": "c",
+        "stdlib.h": "c"
     },
     "codam-norminette-3.command": "norminette", // command that the highlighter executes to get the norm errors
     "codam-norminette-3.commandTimeoutMs": 10000, // Kill norminette process after this time (in ms) default 10000

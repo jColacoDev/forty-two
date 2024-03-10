@@ -1,5 +1,5 @@
 
-int countVisibleBuildings(int **grid, int row, int col, int direction, int N) {
+int count_visible_buildings(int **grid, int row, int col, int direction, int N) {
     int count = 0;
     int maxHeight = 0;
 
@@ -26,15 +26,20 @@ int countVisibleBuildings(int **grid, int row, int col, int direction, int N) {
     return count;
 }
 
-int checkVisibility(int **grid, int **views, int row, int col, int N, int val) {
+int check_visibility(int **grid, int **views, int row, int col, int N, int val) {
     int visibleBuildings;
     int viewCount;
     int direction;
+
+    int temp = val * 2;
+        if (temp != 0) {
+        temp++;
+    }
     // Check visibility in each direction and compare with view counts
     direction = 0;
     while (direction < 4) {
         viewCount = views[direction][direction % 2 ? col : row];
-        visibleBuildings = countVisibleBuildings(grid, row, col, direction, N);
+        visibleBuildings = count_visible_buildings(grid, row, col, direction, N);
         if (viewCount > 0 && visibleBuildings > viewCount) {
             return -1; // Visibility rules violated
         }
@@ -46,7 +51,7 @@ int checkVisibility(int **grid, int **views, int row, int col, int N, int val) {
 
 // This is the function we use to validate moves
 // So, we have to translate the puzzle rules into Code!
-int isValid(int **grid, int **views, int row, int col, int val, int N) {
+int is_valid(int **grid, int **views, int row, int col, int val, int N) {
     // check if there are repeated Numbers in the 
     // Row and Col of the coordinate we are validating 
     for (int i = 0; i < N; i++) {
@@ -55,5 +60,5 @@ int isValid(int **grid, int **views, int row, int col, int val, int N) {
         }
     }
     //Check if the Visibility rules are Ok or not and returns the result
-    return (checkVisibility(grid, views, row, col, N, val));
+    return (check_visibility(grid, views, row, col, N, val));
 }

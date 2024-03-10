@@ -1,14 +1,43 @@
-#include "sky_scrappers.c" 
+#include <stdlib.h>
+#include <stdio.h>
 
-void printGrid(int **grid, int N) {
-    int i = -1;
-    int j = -1;
-    
-    while (i++ < N) { // run all the **grid rows
-        while (j++ < N) { // run all the **grid cols
-            printf("%d ", grid[i][j]); // print the value!
+int is_valid(int **grid, int **views, int row, int col, int val, int N);
+void print_views(int *views[]);
+
+int init_grid(int *grid[], int N) {
+    int i = 0;
+    while (i < N) { // Allocate memory for each row
+        grid[i] = (int *)malloc(N * sizeof(int)); 
+        if (grid[i] == NULL) { // Check for memory allocation failure
+            // Free previously allocated memory
+            while (i > 0) {
+                free(grid[--i]);
+            }
+            return -1; // Return -1 for failure
+        }
+        int j = 0;
+        while (j < N) {
+            grid[i][j] = 0; // Initialize element to 0
+            j++;
+        }
+        i++;
+    }
+    return 1; // Return 1 for success
+}
+
+
+void print_grid(int *grid[], int N) {
+    int i = 0;
+
+    printf("Grid matrix:\n");
+    while (i < N) {
+        int j = 0;
+        while (j < N) {
+            printf("%d ", grid[i][j]);
+            j++;
         }
         printf("\n");
+        i++;
     }
 }
 
@@ -32,11 +61,16 @@ int check_empty_cell(int **grid, int *row, int *col, int N) {
     return (1); // if there were no empty cells, it's FINISH HIM!
 }
 
-int puzzle_algorithm(int **grid, int **views, int N) {
+int puzzle_algorithm(int **grid, int **views, int N, int counter) {
     int row = -1; 
     int col = -1;
     int building_height = 0;
 
+    printf("\nHere.\n");
+    // print_grid(grid, N);
+    // print_views(views);
+
+    counter++;
     // First we check if the puzzle has empty cells
     // or by other words, if it's complete and solved 
     if (check_empty_cell(grid, &row, &col, N)) {
@@ -46,12 +80,12 @@ int puzzle_algorithm(int **grid, int **views, int N) {
     // After finding an empty cell we try buildings 1->n sizes
     while (building_height++ <= N) {
         // And we validate if it's a valid move or not
-        if (isValid(grid, views, row, col, building_height, N)) {
+        if (is_valid(grid, views, row, col, building_height, N)) {
             // if it's valid we put it there!
             grid[row][col] = building_height;
             // And we move on to the next move by calling 
             // puzzle_algorithm recursively
-            if (puzzle_algorithm(grid, views, N)) {
+            if (puzzle_algorithm(grid, views, N, counter)) {
                 //if this returns true, means some other call to this function
                 //was successful! And so We also return 1 to signal the success!
                 return 1;
