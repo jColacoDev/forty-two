@@ -144,3 +144,4 @@ void ft_putnbr(int n) {
         divisor /= 10; // Update the divisor for the next digit
     }
 }
+
