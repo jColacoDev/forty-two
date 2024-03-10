@@ -1,122 +1,15 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-
 #define GRID_SIZE 4
-#define NUM_DIRECTIONS 4
+#define NUM_VIEWS 4
 
-char *ft_strdup(const char *str) {
-    // Calculate the length of the string
-    int len = 0;
-    while (str[len] != '\0') {
-        len++;
-    }
-    // Allocate memory for the copy
-    char *copy = (char *)malloc((len + 1) * sizeof(char));
-    if (copy == NULL) {
-        return NULL; // Memory allocation failed
-    }
-    // Copy the string
-    for (int i = 0; i <= len; i++) {
-        copy[i] = str[i];
-    }
-    return copy;
-}
-
-int is_delimiter(char c, const char *delim) {
-    while (*delim != '\0') {
-        if (c == *delim) {
-            return 1;
-        }
-        delim++;
-    }
-    return 0;
-}
-
-char *ft_strcpy(char *dest, const char *src) {
-    char *start = dest;
-    while (*src) {
-        *dest++ = *src++;
-    }
-    *dest = '\0'; // Null-terminate the destination string
-    return start;
-}
-
-char *ft_strtok(char *str, const char *delim) {
-    static char *value;
-    static char *next_value;
-    char *result;
-
-    if (str) {
-        value = str;
-    } else {
-        value = next_value;
-    }
-    if (value == NULL) {
-        return NULL;
-    }
-
-    // Skip leading delimiters
-    while (*value != '\0' && is_delimiter(*value, delim)) {
-        value++;
-    }
-
-    if (*value == '\0') {
-        return NULL;
-    }
-
-    result = value;
-
-    // Find the end of the value
-    while (*value != '\0' && !is_delimiter(*value, delim)) {
-        value++;
-    }
-
-    if (*value != '\0') {
-        *value = '\0';  // Replace delimiter with null terminator
-        value++;
-        next_value = value;
-    } else {
-        next_value = NULL;
-    }
-
-    // Allocate memory for the token and copy characters
-    char *token = (char *)malloc((value - result + 1) * sizeof(char));
-    if (token == NULL) {
-        return NULL;  // Memory allocation failed
-    }
-    ft_strcpy(token, result);  // Copy characters from result to token
-
-    return token;
-}
-
-
-
-int ft_atoi(const char *str) {
-    int result = 0;
-    int negative = 0;
-    // Handle leading whitespace
-    while (str != NULL && (*str == ' ' || *str == '\t' || *str == '\n')) {
-        str++;
-    }
-    // Handle optional sign
-    if (*str == '-') {
-        negative = 1;
-        str++;
-    } else if (*str == '+') {
-        str++;
-    }
-    // Convert digits to integer
-    while (*str >= '0' && *str <= '9') {
-        result = result * 10 + (*str - '0');
-        str++;
-    }
-    // Apply sign
-    if (negative) {
-        result = -result;
-    }
-    return result;
-}
+int ft_atoi(const char *str);
+char *ft_strdup(const char *str);
+char *ft_strtok(char *str, const char *delim);
+void ft_putstr(char *str);
+int init_grid(int *grid[], int N);
+void ft_putnbr(int n);
 
 int is_number(const char *str) {
     while (*str) {
@@ -129,11 +22,26 @@ int is_number(const char *str) {
 
 void print_views(int *views[]) {
     printf("Views matrix:\n");
-    for (int i = 0; i < NUM_DIRECTIONS; i++) {
+    for (int i = 0; i < NUM_VIEWS; i++) {
         for (int j = 0; j < GRID_SIZE; j++) {
             printf("%d ", views[i][j]);
         }
         printf("\n");
+    }
+}
+
+void print_grid(int *grid[], int N) {
+    int i;
+
+    i = 0;
+    while (i < N) {
+        int j = 0;
+        while (j < N) {
+            ft_putnbr(grid[i][j]);
+            j++;
+        }
+        ft_putstr("\n");
+        i++;
     }
 }
 
@@ -165,14 +73,14 @@ int init_views_xargs(int argc, char *argv[], int *views[]) {
     free(arg_copy); // Free the memory allocated for arg_copy
 
     // Check if the correct number of numbers is provided
-    if (numCount != GRID_SIZE * NUM_DIRECTIONS && numCount != 0) {
+    if (numCount != GRID_SIZE * NUM_VIEWS && numCount != 0) {
         fprintf(stderr, "Incorrect number of numbers: %d\n", numCount);
-        fprintf(stderr, "Expected: %d\n", GRID_SIZE * NUM_DIRECTIONS);
+        fprintf(stderr, "Expected: %d\n", GRID_SIZE * NUM_VIEWS);
         return -1;
     }
 
     // Initialize views array
-    for (int i = 0; i < NUM_DIRECTIONS; i++) {
+    for (int i = 0; i < NUM_VIEWS; i++) {
         views[i] = (int *)malloc(GRID_SIZE * sizeof(int));
         if (views[i] == NULL) {
             fprintf(stderr, "Memory allocation failed.\n");
@@ -201,3 +109,32 @@ int init_views_xargs(int argc, char *argv[], int *views[]) {
 
     return 1; // Success
 }
+
+void handle_result(int *grid[], int counter, int result){
+    if (result) {
+        ft_putstr("\nSolution found:\n");
+        print_grid(grid, GRID_SIZE);
+    } else {
+        ft_putstr("\nNo solution exists.\n");
+    }
+    ft_putstr("\nCounter: ");
+    ft_putnbr(counter);
+    ft_putstr("\n");
+}
+
+int init_grids(int argc, char **argv, int *views[], int *grid[]){
+    if (init_views_xargs(argc, argv, views) == -1) {
+        ft_putstr("Error initializing Views grid\n");
+        return (-1);
+    }
+    if (init_grid(grid, GRID_SIZE) == -1) {
+        ft_putstr("Error initializing Matrix grid\n");
+        return (-1);
+    }
+    ft_putstr("Views grid initialized\n");
+    print_grid(views, NUM_VIEWS);
+    ft_putstr("Matrix grid initialized\n");
+    print_grid(grid, GRID_SIZE);
+    return (1);
+}
+

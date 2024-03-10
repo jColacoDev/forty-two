@@ -1,8 +1,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#define GRID_SIZE 4
+#define NUM_VIEWS 4
+
+void print_grid(int *grid[], int N);
 int is_valid(int **grid, int **views, int row, int col, int val, int N);
-void print_views(int *views[]);
 
 int init_grid(int *grid[], int N) {
     int i = 0;
@@ -23,22 +26,6 @@ int init_grid(int *grid[], int N) {
         i++;
     }
     return 1; // Return 1 for success
-}
-
-
-void print_grid(int *grid[], int N) {
-    int i = 0;
-
-    printf("Grid matrix:\n");
-    while (i < N) {
-        int j = 0;
-        while (j < N) {
-            printf("%d ", grid[i][j]);
-            j++;
-        }
-        printf("\n");
-        i++;
-    }
 }
 
 int check_empty_cell(int **grid, int *row, int *col, int N) {
@@ -68,7 +55,7 @@ int puzzle_algorithm(int **grid, int **views, int N, int counter) {
 
     printf("\nHere.\n");
     // print_grid(grid, N);
-    // print_views(views);
+    // print_grid(views, NUM_VIEWS);
 
     counter++;
     // First we check if the puzzle has empty cells
@@ -101,3 +88,20 @@ int puzzle_algorithm(int **grid, int **views, int N, int counter) {
     // and try another building
     return -1;
 }
+
+void free_grids(int *views[], int *grid[]){
+
+    int i;
+
+    i = 0;
+    while (i < GRID_SIZE) {
+        free(grid[i]);
+        i++;
+    }
+    i = 0;
+    while (i < NUM_VIEWS) {
+        free(views[i]);
+        i++;
+    }
+}
+
