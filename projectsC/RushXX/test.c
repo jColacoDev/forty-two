@@ -1,3 +1,4 @@
+#include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -151,60 +152,90 @@ void print_grid(int **grid, int **views) {
 }
 
 
-int count_visible_buildings(int **grid, int row, int col, int direction, int N) {
-    int count = 0;
-    int maxHeight = 0;
 
-    // Calculate the starting and ending indices based on the direction
-    int startRow = row, endRow = row, startCol = col, endCol = col;
-    if (direction == 0 || direction == 2) {
-        endRow = (direction == 0) ? 0 : N - 1;
-    } else {
-        startCol = (direction == 1) ? N - 1 : 0;
-    }
-
-    while ((direction == 0 || direction == 2) ? startRow != endRow : startCol != endCol) {
-        if (grid[row][col] > maxHeight) {
-            maxHeight = grid[row][col];
-            count++;
-        }
-        if (direction == 0 || direction == 2) {
-            startRow += (endRow < startRow) ? -1 : 1;
-        } else {
-            startCol += (endCol < startCol) ? -1 : 1;
-        }
-    }
-
-    return count;
-}
 
 int check_visibility(int **grid, int **views, int row, int col, int size, int val) {
-    int visibleBuildings;
-    int viewCount;
+    int viewVal;
     int direction;
+    int counter;
+    int flag;
 
-    int temp = val * 2;
-        if (temp != 0) {
-        temp++;
-    }
+
+        printf("\ninput Val: %d", val);
+        printf(" | grid value: %d", grid[row][col]);
+        printf("\nrow: %d", row);
+        printf(" | col: %d", col);
+        printf("\ntop: %d", views[0][col]);
+        printf(" | bot: %d", views[1][col]);
+        printf(" | left: %d", views[2][row]);
+        printf(" | right: %d \n", views[3][row]);
+        print_grid(grid, views);
+
+
+    flag = 1;
     // Check visibility in each direction and compare with view counts
-    direction = 0;
-    while (direction < 4) {
-        viewCount = views[direction][direction % 2 ? col : row];
-        visibleBuildings = count_visible_buildings(grid, row, col, direction, size);
-        if (viewCount > 0 && visibleBuildings > viewCount) {
-            return -1; // Visibility rules violated
+    for (direction = 0; direction < 4; direction++) {
+        viewVal = views[direction][col];
+
+        switch (direction) {
+            case 0: // Top
+                counter = count_visible_buildings(grid, views, row, col, direction, size, val);
+                printf("-----\n");
+                printf("topView: %d", viewVal);
+                printf(" | counter: %d", counter);
+
+                if (counter > viewVal) {
+                    flag = 0; // Visibility rules violated
+                }
+                break;
+            case 1: // Bottom
+                counter = count_visible_buildings(grid, views, row, col, direction, size, val);
+                printf("-----\n");
+                printf("botVal: %d", viewVal);
+                printf(" | counter: %d", counter);
+
+                if (counter > viewVal) {
+                    flag = 0; // Visibility rules violated
+                }
+                break;
+            case 2: // Left
+                counter = count_visible_buildings(grid, views, row, col, direction, size, val);
+                printf("-----\n");
+                printf("lefVal: %d", viewVal);
+                printf(" | counter: %d", counter);
+                if (counter > viewVal) {
+                    flag = 0; // Visibility rules violated
+                }
+                break;
+            case 3: // Right
+                counter = count_visible_buildings(grid, views, row, col, direction, size, val);
+                printf("-----\n");
+                printf("rigVal: %d | ",viewVal);
+                printf("counter: %d\n", counter);
+                if (counter > viewVal) {
+                    flag = 0; // Visibility rules violated
+                }
+                break;
         }
-        direction++;
+        printf("-----\n");
+
+            // printf("\nview nCounter: %d", counter);
     }
 
-    return 1; // Visibility rules satisfied
+    return flag; // Visibility rules satisfied
 }
 
 int is_valid(int **grid, int **views, int row, int col, int val, int size) {
-    // Check if the value already exists in the same row or column
+    // Check if the value already exists in the same row
     for (int i = 0; i < size; i++) {
-        if ((grid[row][i] == val && i != col) || (grid[i][col] == val && i != row)) {
+        if (grid[row][i] == val && i != col) {
+            return 0; // Not valid
+        }
+    }
+
+    // Check if the value already exists in the same column
+    for (int i = 0; i < size; i++) {
+        if (grid[i][col] == val && i != row) {
             return 0; // Not valid
         }
     }
@@ -213,7 +244,48 @@ int is_valid(int **grid, int **views, int row, int col, int val, int size) {
     return check_visibility(grid, views, row, col, size, val);
 }
 
+int count_visible_buildings(int **grid, int **views, int row, int col, int direction, int size, int val) {
+    int count = 0;
+    int maxHeight = 0; // Initialize the maxHeight to 0
 
+    // Adjust the starting and ending indices based on the direction
+    int start, end, step;
+    switch (direction) {
+        case 0: // Top
+            start = 0;
+            end = size;
+            step = 1;
+            break;
+        case 1: // Bottom
+            start = size - 1;
+            end = -1;
+            step = -1;
+            break;
+        case 2: // Left
+            start = 0;
+            end = size;
+            step = 1;
+            break;
+        case 3: // Right
+            start = size - 1;
+            end = -1;
+            step = -1;
+            break;
+        default:
+            return -1; // Invalid direction
+    }
+
+    // Traverse the specified row or column based on the direction
+    for (int i = start; i != end; i += step) {
+        int currentHeight = (direction == 0 || direction == 1) ? grid[i][col] : grid[row][i];
+        if (currentHeight > maxHeight) {
+            count++;
+            maxHeight = currentHeight;
+        }
+    }
+
+    return count;
+}
 
 int init_views_xargs(int argc, char *argv[], int *views[]) {
     // Check if the correct number of arguments is provided
@@ -224,8 +296,7 @@ int init_views_xargs(int argc, char *argv[], int *views[]) {
     // }
 
     // char *arg = argv[1]; // Extract numbers from the second argument
-    // char *arg = "2 1 4 2 2 1 3 2 2 3 1 3 2 3 1 2";
-    char *arg = "1 1 1 2 2 2 2 3 3 3 3 4 4 4 4 5";
+    char *arg = "1 2 3 3 3 3 1 2 1 2 2 2 4 3 1 2";
     if (arg == NULL || *arg == '\0') {
         fprintf(stderr, "No input provided.\n");
         return -1;
@@ -284,33 +355,60 @@ int init_views_xargs(int argc, char *argv[], int *views[]) {
     return 1; // Success
 }
 
-int solve_sky_scrapper(int **grid, int **views, int row, int col, int size) {
+
+int solve_sky_scrapper(int **grid, int **views, int row, int col, int size, int *deepCounter) {
+    (*deepCounter)++;
+    printf("\ndeepCounter++: %d", *deepCounter);
     if (row == size) {
+        (*deepCounter)--;
+        printf("\ndeepCounter--: %d", *deepCounter);
         return 1;
     }
     if (col == size) {
-        return solve_sky_scrapper(grid, views, row + 1, 0, size);
+        (*deepCounter)--;
+        printf("\ndeepCounter--: %d", *deepCounter);
+        if (solve_sky_scrapper(grid, views, row + 1, 0, size, deepCounter)) {
+            (*deepCounter)++;
+            printf("\ndeepCounter++: %d", *deepCounter);
+            return 1;
+        } else {
+            (*deepCounter)--;
+            printf("\ndeepCounter--: %d", *deepCounter);
+            return 0;
+        }
     }
     if (grid[row][col] != 0) {
-        return solve_sky_scrapper(grid, views, row, col + 1, size);
+        if (solve_sky_scrapper(grid, views, row, col + 1, size, deepCounter)) {
+            (*deepCounter)++;
+            printf("\ndeepCounter++: %d", *deepCounter);
+            return 1;
+        } else {
+            (*deepCounter)--;
+            printf("\ndeepCounter--: %d", *deepCounter);
+            return 0;
+        }
     }
     for (int num = 1; num <= size; num++) {
-            printf("\nValidating...\n");
         if (is_valid(grid, views, row, col, num, size)) {
             grid[row][col] = num;
-            printf("\nValidation\n");
-
-            // print_grid(grid, views);
-            if (solve_sky_scrapper(grid, views, row, col + 1, size)) {
+            if (solve_sky_scrapper(grid, views, row, col + 1, size, deepCounter)) {
+                (*deepCounter)--;
+                printf("\ndeepCounter--: %d", *deepCounter);
                 return 1;
             }
             grid[row][col] = 0;
         }
     }
+    (*deepCounter)--;
+    printf("\ndeepCounter--: %d", *deepCounter);
     return 0;
 }
 
+
+
+
 int main() {
+    int deepCounter = 0;
     int **grid = (int **)malloc(GRID_SIZE * sizeof(int *));
     int **views = (int **)malloc(4 * sizeof(int *));
     for (int i = 0; i < GRID_SIZE; i++) {
@@ -328,8 +426,8 @@ int main() {
     init_views_xargs(1, NULL, views); // Initialize views
     print_grid(grid, views);
 
-    if (solve_sky_scrapper(grid, views, 0, 0, GRID_SIZE)) {
-        printf("Solution found:\n");
+    if (solve_sky_scrapper(grid, views, 0, 0, GRID_SIZE, &deepCounter)) {
+        printf("\nSolution found:\n");
         print_grid(grid, views);
     } else {
         printf("No solution found.\n");
