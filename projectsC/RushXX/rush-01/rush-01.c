@@ -130,7 +130,6 @@ void ft_putnbr(int n) {
     }
 }
 
-
 void print_grid(int **grid, int **views) {
     printf(" ");
     for (int i = 0; i < GRID_SIZE; i++) {
@@ -151,25 +150,21 @@ void print_grid(int **grid, int **views) {
     printf("\n");
 }
 
-
-
-
 int check_visibility(int **grid, int **views, int row, int col, int size, int val) {
     int viewVal;
     int direction;
     int counter;
     int flag;
 
-
-        printf("\ninput Val: %d", val);
-        printf(" | grid value: %d", grid[row][col]);
-        printf("\nrow: %d", row);
-        printf(" | col: %d", col);
-        printf("\ntop: %d", views[0][col]);
-        printf(" | bot: %d", views[1][col]);
-        printf(" | left: %d", views[2][row]);
-        printf(" | right: %d \n", views[3][row]);
-        print_grid(grid, views);
+    printf("\ninput Val: %d", val);
+    printf(" | grid value: %d", grid[row][col]);
+    printf("\nrow: %d", row);
+    printf(" | col: %d", col);
+    printf("\ntop: %d", views[0][col]);
+    printf(" | bot: %d", views[1][col]);
+    printf(" | left: %d", views[2][row]);
+    printf(" | right: %d \n", views[3][row]);
+    print_grid(grid, views);
 
 
     flag = 1;
@@ -187,6 +182,9 @@ int check_visibility(int **grid, int **views, int row, int col, int size, int va
                 if (counter > viewVal) {
                     flag = 0; // Visibility rules violated
                 }
+                if(val > viewVal && row < viewVal-1){
+                    flag = 0; // Visibility rules violated
+                }
                 break;
             case 1: // Bottom
                 counter = count_visible_buildings(grid, views, row, col, direction, size, val);
@@ -197,6 +195,9 @@ int check_visibility(int **grid, int **views, int row, int col, int size, int va
                 if (counter > viewVal) {
                     flag = 0; // Visibility rules violated
                 }
+                if(val > viewVal && row > viewVal-1){
+                    flag = 0; // Visibility rules violated
+                }
                 break;
             case 2: // Left
                 counter = count_visible_buildings(grid, views, row, col, direction, size, val);
@@ -204,6 +205,9 @@ int check_visibility(int **grid, int **views, int row, int col, int size, int va
                 printf("lefVal: %d", viewVal);
                 printf(" | counter: %d", counter);
                 if (counter > viewVal) {
+                    flag = 0; // Visibility rules violated
+                }
+                if(val > viewVal && col < viewVal-1){
                     flag = 0; // Visibility rules violated
                 }
                 break;
@@ -229,6 +233,8 @@ int is_valid(int **grid, int **views, int row, int col, int val, int size) {
     // Check if the value already exists in the same row
     for (int i = 0; i < size; i++) {
         if (grid[row][i] == val && i != col) {
+        printf("-----already in row\n");
+
             return 0; // Not valid
         }
     }
@@ -236,7 +242,9 @@ int is_valid(int **grid, int **views, int row, int col, int val, int size) {
     // Check if the value already exists in the same column
     for (int i = 0; i < size; i++) {
         if (grid[i][col] == val && i != row) {
+        printf("-----already in column\n");
             return 0; // Not valid
+
         }
     }
 
@@ -299,7 +307,7 @@ int init_views_xargs(int argc, char *argv[], int *views[]) {
     char *arg = "1 2 3 3 3 3 1 2 1 2 2 2 4 3 1 2";
     if (arg == NULL || *arg == '\0') {
         fprintf(stderr, "No input provided.\n");
-        return -1;
+        return 0;
     }
 
     // Count the number of tokens in arg
@@ -307,7 +315,7 @@ int init_views_xargs(int argc, char *argv[], int *views[]) {
     char *arg_copy = ft_strdup(arg);
     if (arg_copy == NULL) {
         fprintf(stderr, "Memory allocation failed.\n");
-        return -1;
+        return 0;
     }
     char *token = ft_strtok(arg_copy, " ");
     while (token) {
@@ -320,7 +328,7 @@ int init_views_xargs(int argc, char *argv[], int *views[]) {
     if (numCount != GRID_SIZE * NUM_VIEWS && numCount != 0) {
         fprintf(stderr, "Incorrect number of numbers: %d\n", numCount);
         fprintf(stderr, "Expected: %d\n", GRID_SIZE * NUM_VIEWS);
-        return -1;
+        return 0;
     }
 
     // Initialize views array
@@ -328,7 +336,7 @@ int init_views_xargs(int argc, char *argv[], int *views[]) {
         views[i] = (int *)malloc(GRID_SIZE * sizeof(int));
         if (views[i] == NULL) {
             fprintf(stderr, "Memory allocation failed.\n");
-            return -1;
+            return 0;
         }
         // Initialize each element to a default value (e.g., 0)
         for (int j = 0; j < GRID_SIZE; j++) {
@@ -340,7 +348,7 @@ int init_views_xargs(int argc, char *argv[], int *views[]) {
     arg_copy = ft_strdup(arg);
     if (arg_copy == NULL) {
         fprintf(stderr, "Memory allocation failed.\n");
-        return -1;
+        return 0;
     }
     token = ft_strtok(arg_copy, " ");
     numCount = 0;
@@ -403,7 +411,6 @@ int solve_sky_scrapper(int **grid, int **views, int row, int col, int size, int 
     printf("\ndeepCounter--: %d", *deepCounter);
     return 0;
 }
-
 
 
 
