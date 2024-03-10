@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <unistd.h>
 
-
 int is_delimiter(char c, const char *delim) {
     while (*delim != '\0') {
         if (c == *delim) {
@@ -53,23 +52,19 @@ char *ft_strtok(char *str, const char *delim) {
     if (value == NULL) {
         return NULL;
     }
-
     // Skip leading delimiters
     while (*value != '\0' && is_delimiter(*value, delim)) {
         value++;
     }
-
     if (*value == '\0') {
         return NULL;
     }
-
     result = value;
 
     // Find the end of the value
     while (*value != '\0' && !is_delimiter(*value, delim)) {
         value++;
     }
-
     if (*value != '\0') {
         *value = '\0';  // Replace delimiter with null terminator
         value++;
@@ -77,14 +72,12 @@ char *ft_strtok(char *str, const char *delim) {
     } else {
         next_value = NULL;
     }
-
     // Allocate memory for the token and copy characters
     char *token = (char *)malloc((value - result + 1) * sizeof(char));
     if (token == NULL) {
         return NULL;  // Memory allocation failed
     }
     ft_strcpy(token, result);  // Copy characters from result to token
-
     return token;
 }
 
@@ -126,13 +119,28 @@ void ft_putstr(char *str) {
 }
 
 void ft_putnbr(int n) {
+    // Handle negative numbers
     if (n < 0) {
         ft_putchar('-');
         n = -n;
     }
-    if (n >= 10) {
-        ft_putnbr(n / 10);
+    // Handle the case of n being 0 separately
+    if (n == 0) {
+        ft_putchar('0');
+        return;
     }
-    ft_putchar('0' + n % 10);
+    // Initialize variables
+    int divisor = 1;
+    int temp = n;
+    // Find the divisor for the highest order digit
+    while (temp >= 10) {
+        temp /= 10;
+        divisor *= 10;
+    }
+    // Output each digit one by one using the divisor
+    while (divisor > 0) {
+        ft_putchar('0' + (n / divisor)); // Output the current digit
+        n %= divisor; // Remove the current digit from n
+        divisor /= 10; // Update the divisor for the next digit
+    }
 }
-

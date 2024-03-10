@@ -1,3 +1,7 @@
+void ft_putstr(char *str);
+void print_grid(int *grid[], int N);
+void ft_putnbr(int n);
+
 
 int count_visible_buildings(int **grid, int row, int col, int direction, int N) {
     int count = 0;
@@ -54,11 +58,33 @@ int check_visibility(int **grid, int **views, int row, int col, int N, int val) 
 int is_valid(int **grid, int **views, int row, int col, int val, int N) {
     // check if there are repeated Numbers in the 
     // Row and Col of the coordinate we are validating 
-    for (int i = 0; i < N; i++) {
-        if (grid[row][i] == val || grid[i][col] == val) {
-            return -1;
+    int i;
+
+    print_grid(grid, N);
+
+    i = 0;
+    while (i < N) {
+        ft_putstr("\nval: ");
+        ft_putnbr(val);
+        ft_putstr("\ni: ");
+        ft_putnbr(i);
+        ft_putstr("\n");
+        ft_putstr("\nrow: ");
+        ft_putnbr(row);
+        ft_putstr("\ncol: ");
+        ft_putnbr(col);
+        ft_putstr("\ngrid[row][i]: ");
+        ft_putnbr(grid[row][i]);
+        ft_putstr("\ngrid[i][col]: ");
+        ft_putnbr(grid[i][col]);
+        if ((grid[row][i] == val && i != col) || (grid[i][col] == val && i != row)) {
+            ft_putstr("\nReturn -1\n");
+            return (-1);
         }
+        i++;
     }
+
     //Check if the Visibility rules are Ok or not and returns the result
     return (check_visibility(grid, views, row, col, N, val));
 }
+

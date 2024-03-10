@@ -8,8 +8,8 @@ int ft_atoi(const char *str);
 char *ft_strdup(const char *str);
 char *ft_strtok(char *str, const char *delim);
 void ft_putstr(char *str);
-int init_grid(int *grid[], int N);
 void ft_putnbr(int n);
+int **init_grid(int N);
 
 int is_number(const char *str) {
     while (*str) {
@@ -34,6 +34,7 @@ void print_grid(int *grid[], int N) {
     int i;
 
     i = 0;
+    ft_putstr("\n");
     while (i < N) {
         int j = 0;
         while (j < N) {
@@ -43,16 +44,19 @@ void print_grid(int *grid[], int N) {
         ft_putstr("\n");
         i++;
     }
+    ft_putstr("\n");
 }
 
 int init_views_xargs(int argc, char *argv[], int *views[]) {
     // Check if the correct number of arguments is provided
-    if (argc != 2) {
-        fprintf(stderr, "Usage: %s \"4 3 2 1 1 2 2 2 4 3 2 1 1 2 2 2\"\n", argv[0]);
-        return -1;
-    }
 
-    char *arg = argv[1]; // Extract numbers from the second argument
+    // if (argc != 2) {
+    //     fprintf(stderr, "Usage: %s \"4 3 2 1 1 2 2 2 4 3 2 1 1 2 2 2\"\n", argv[0]);
+    //     return -1;
+    // }
+
+    // char *arg = argv[1]; // Extract numbers from the second argument
+    char *arg = "4 3 2 1 1 2 2 2 4 3 2 1 1 2 2 2";
     if (arg == NULL || *arg == '\0') {
         fprintf(stderr, "No input provided.\n");
         return -1;
@@ -121,20 +125,3 @@ void handle_result(int *grid[], int counter, int result){
     ft_putnbr(counter);
     ft_putstr("\n");
 }
-
-int init_grids(int argc, char **argv, int *views[], int *grid[]){
-    if (init_views_xargs(argc, argv, views) == -1) {
-        ft_putstr("Error initializing Views grid\n");
-        return (-1);
-    }
-    if (init_grid(grid, GRID_SIZE) == -1) {
-        ft_putstr("Error initializing Matrix grid\n");
-        return (-1);
-    }
-    ft_putstr("Views grid initialized\n");
-    print_grid(views, NUM_VIEWS);
-    ft_putstr("Matrix grid initialized\n");
-    print_grid(grid, GRID_SIZE);
-    return (1);
-}
-

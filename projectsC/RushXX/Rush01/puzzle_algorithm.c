@@ -4,93 +4,57 @@
 #define GRID_SIZE 4
 #define NUM_VIEWS 4
 
+void ft_putnbr(int n);
+void ft_putstr(char *str);
 void print_grid(int *grid[], int N);
 int is_valid(int **grid, int **views, int row, int col, int val, int N);
 
-int init_grid(int *grid[], int N) {
-    int i = 0;
-    while (i < N) { // Allocate memory for each row
-        grid[i] = (int *)malloc(N * sizeof(int)); 
-        if (grid[i] == NULL) { // Check for memory allocation failure
+int **init_grid(int N) {
+    int **grid = (int **)malloc(N * sizeof(int *));
+    if (grid == NULL) {
+        return NULL;
+    }
+    for (int i = 0; i < N; ++i) {
+        grid[i] = (int *)malloc(N * sizeof(int));
+        if (grid[i] == NULL) {
             // Free previously allocated memory
-            while (i > 0) {
-                free(grid[--i]);
+            for (int j = 0; j < i; ++j) {
+                free(grid[j]);
             }
-            return -1; // Return -1 for failure
+            free(grid);
+            return NULL;
         }
-        int j = 0;
+        // Initialize elements of each row to 0
+        for (int j = 0; j < N; ++j) {
+            grid[i][j] = 0;
+        }
+    }
+    return grid;
+}
+
+
+int check_empty_cell(int **grid, int *row, int *col, int N) {
+    int i = 0;
+    int j;
+
+    while (i < N) {
+        j = 0;
         while (j < N) {
-            grid[i][j] = 0; // Initialize element to 0
+            if (grid[i][j] == 0) {
+                *row = i;
+                *col = j;
+                printf("\nEmpty cell found at row: %d, col: %d\n", *row, *col);
+                return -1;
+            }
             j++;
         }
         i++;
     }
-    return 1; // Return 1 for success
-}
-
-int check_empty_cell(int **grid, int *row, int *col, int N) {
-    int i = -1;
-    int j = -1;
-
-    // Double loop to run a n*n matrix and check if 
-    // it's empty by looking for 0's
-    // if it is, we save the coordinates in Row and Col variables
-    while (i++ < N) { // loop the rows 
-        while (j++ < N) { // loop the cols
-            if (grid[i][j] == 0) { // it has a 0 means it's an empty cell
-                *row = i;   // we save the coordinates
-                *col = j;
-
-                return(-1); // and return -1, meaning there is a empty cell
-            }
-        }
-    }           // Success!
-    return (1); // if there were no empty cells, it's FINISH HIM!
-}
-
-int puzzle_algorithm(int **grid, int **views, int N, int counter) {
-    int row = -1; 
-    int col = -1;
-    int building_height = 0;
-
-    printf("\nHere.\n");
-    // print_grid(grid, N);
-    // print_grid(views, NUM_VIEWS);
-
-    counter++;
-    // First we check if the puzzle has empty cells
-    // or by other words, if it's complete and solved 
-    if (check_empty_cell(grid, &row, &col, N)) {
-        return 1;
-    }
-
-    // After finding an empty cell we try buildings 1->n sizes
-    while (building_height++ <= N) {
-        // And we validate if it's a valid move or not
-        if (is_valid(grid, views, row, col, building_height, N)) {
-            // if it's valid we put it there!
-            grid[row][col] = building_height;
-            // And we move on to the next move by calling 
-            // puzzle_algorithm recursively
-            if (puzzle_algorithm(grid, views, N, counter)) {
-                //if this returns true, means some other call to this function
-                //was successful! And so We also return 1 to signal the success!
-                return 1;
-            }
-            // If we didn't return before with a success
-            // Than let's backtrace, we place a 0 to flag 
-            // empty cell, where we were testing out buildings
-            grid[row][col] = 0;
-        }
-    }
-    // after a bunch of tries and no valid moves
-    // We return -1 to flag that we must go back 
-    // and try another building
-    return -1;
+    printf("No empty cells found.\n");
+    return 1;
 }
 
 void free_grids(int *views[], int *grid[]){
-
     int i;
 
     i = 0;
@@ -103,5 +67,53 @@ void free_grids(int *views[], int *grid[]){
         free(views[i]);
         i++;
     }
+}
+
+int puzzle_algorithm(int **grid, int **views, int N, int *counter) {
+    int row = 0; 
+    int col = 0;
+    int building;
+    int building2;
+
+    // Increment the counter
+    (*counter)++;
+
+    print_grid(grid, N);
+    // Check for empty cells
+    if (check_empty_cell(grid, &row, &col, N) == 1) {
+        // If no empty cell is found, print debug message and return 1
+        return 1;
+    }
+
+    // Debug message if an empty cell is found
+    // print_grid(grid, N);
+    // Iterate through possible building heights
+    building = 1;
+    building2 = 0;
+    
+    printf("%d",9999);
+
+    ft_putstr("\nBuilding2: ");
+    printf("%d",building2);
+    ft_putstr("\nN: ");
+    printf("%d",N);
+    while (building <= N) {
+        ft_putstr("\ntesting Building: ");
+        printf("%d",building);
+
+        if (is_valid(grid, views, row, col, building, N)) {
+            grid[row][col] = building;
+            if (puzzle_algorithm(grid, views, N, counter)) {
+                return 1; // If a solution is found, return 1
+            }
+        }
+        // Increment building to try the next possible value
+        building++;
+    }
+    // If no valid building height is found, return -1
+    // If no solution is found, backtrack
+    grid[row][col] = 0;
+    printf("\nHere. -1\n");
+    return -1;
 }
 
