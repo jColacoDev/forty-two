@@ -26,5 +26,6 @@
     ],
     "codam-norminette-3.highlight-color": "rgba(255, 0, 0, 0.2)", // highlight norm errors in custom color. Can be in rgba, hex, or vscode.ThemeColor format.
     "codam-norminette-3.displayErrorName": false,
-    "makefile.makePath": "" // display name of error on hover
+    "makefile.makePath": "./projectsC/CXXC09/ex01/",
+    "makefile.makefilePath": "projectsC/CXXC09/ex01/" // display name of error on hover
 }

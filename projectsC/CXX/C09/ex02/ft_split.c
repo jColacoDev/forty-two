@@ -61,8 +61,7 @@ char **ft_split(char *str, char *charset) {
     return (result);
 }
 
-
-
+/*
 void print_str_array(char **arr) {
     if (arr == NULL) {
         printf("Array is NULL\n");
@@ -114,3 +113,4 @@ int main() {
 
     return 0;
 }
+*/
