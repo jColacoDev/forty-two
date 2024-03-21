@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_combn.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joao-rde <joao-rde@student.42.com>         +#+  +:+       +#+        */
+/*   By: joao-rde <joao-rde@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/05 04:02:53 by joao-rde          #+#    #+#             */
-/*   Updated: 2024/03/05 04:02:53 by joao-rde         ###   ########.fr       */
+/*   Created: 2024/03/05 16:30:40 by joao-rde          #+#    #+#             */
+/*   Updated: 2024/03/07 15:41:23 by joao-rde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	generate_combinations(int data[], int start, int index, int n)
 		is_first_combination = is_first_combination_func(data, n);
 		if (!is_first_combination)
 		{
-			write(1, ",", 1);
+			write(1, ", ", 2);
 		}
 		print_combination(data, n);
 		return ;
@@ -73,23 +73,21 @@ void	generate_combinations(int data[], int start, int index, int n)
 
 void	ft_print_combn(int n)
 {
-	int		data[10];
-	int		first;
+	int	data[10];
+	int	first;
 
 	first = 1;
-	if (n < 1 && n > 9)
+	if (n < 1 || n > 9)
 	{
-		write(1, "Valor de n fora do intervalo permitido.\n", 40);
 		return ;
 	}
 	generate_combinations(data, 0, 0, n);
 }
 
+/*
 int	main(void)
 {
-	int	n;
-
-	n = 4;
-	ft_print_combn(n);
+	ft_print_combn(2);
 	return (0);
 }
+*/

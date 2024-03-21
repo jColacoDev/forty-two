@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: joao-rde <joao-rde@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/05 03:07:37 by joao-rde          #+#    #+#             */
-/*   Updated: 2024/03/05 17:17:00 by joao-rde         ###   ########.fr       */
+/*   Created: 2024/03/05 16:30:08 by joao-rde          #+#    #+#             */
+/*   Updated: 2024/03/07 15:41:51 by joao-rde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,12 @@ void	ft_print_numbers(void)
 		write(1, &digit, 1);
 		digit++;
 	}
-	write(1, "\n", 1);
 }
 
+/*
 int	main(void)
 {
 	ft_print_numbers();
 	return (0);
 }
+*/

@@ -1,6 +1,25 @@
-#ifndef FT_ABS_H
-#define FT_ABS_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_abs.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joao-rde <joao-rde@student.42lisboa.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/20 23:38:19 by joao-rde          #+#    #+#             */
+/*   Updated: 2024/03/21 00:01:16 by joao-rde         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#define ABS(Value) (Value < 0 ? -Value : Value)
+#ifndef FT_ABS_H
+# define FT_ABS_H
+
+int	ft_absolute(int n)
+{
+	if (n < 0)
+		return (-n);
+	return (n);
+}
+
+# define ABS(Value) ft_absolute(Value)
 
 #endif

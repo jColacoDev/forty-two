@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joao-rde <joao-rde@student.42.com>         +#+  +:+       +#+        */
+/*   By: joao-rde <joao-rde@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/05 02:33:14 by joao-rde          #+#    #+#             */
-/*   Updated: 2024/03/05 02:33:14 by joao-rde         ###   ########.fr       */
+/*   Created: 2024/03/05 16:29:55 by joao-rde          #+#    #+#             */
+/*   Updated: 2024/03/07 18:14:12 by joao-rde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 void	ft_putchar(char c)
 {
 	write(1, &c, 1);
-	return ;
 }
 
+/*
 int	main(void)
 {
 	ft_putchar('Y');
 	return (0);
 }
+*/

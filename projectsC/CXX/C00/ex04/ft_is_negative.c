@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_is_negative.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joao-rde <joao-rde@student.42.com>         +#+  +:+       +#+        */
+/*   By: joao-rde <joao-rde@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/05 03:08:49 by joao-rde          #+#    #+#             */
-/*   Updated: 2024/03/05 03:08:49 by joao-rde         ###   ########.fr       */
+/*   Created: 2024/03/05 16:30:14 by joao-rde          #+#    #+#             */
+/*   Updated: 2024/03/07 15:41:46 by joao-rde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,4 @@ void	ft_is_negative(int n)
 		sign = 'P';
 	}
 	write(1, &sign, 1);
-}
-
-int	main(void)
-{
-	ft_is_negative(-10);
-	return (0);
 }
