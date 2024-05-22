@@ -24,7 +24,7 @@ void	inc_asign(int grid[4][4], int constant, int roworcolumn, int inc_or_dec)
 				grid[constant][z] = 4 - z; 
 			else
 				grid[z][constant] = 4 - z;
-		}
+		} 
 	}
 }
 
