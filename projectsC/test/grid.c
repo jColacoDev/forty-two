@@ -18,7 +18,7 @@ void	inc_asign(int grid[4][4], int constant, int roworcolumn, int inc_or_dec)
 	else
 	{
 		z = 4;
-		while (--z > -1)
+		while (--z > -1) 
 		{
 			if (roworcolumn == 0)
 				grid[constant][z] = 4 - z;
