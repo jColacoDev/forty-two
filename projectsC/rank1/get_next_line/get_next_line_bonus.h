@@ -6,7 +6,7 @@
 /*   By: joao-rde <joao-rde@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:46:32 by joao-rde          #+#    #+#             */
-/*   Updated: 2024/05/15 19:46:33 by joao-rde         ###   ########.fr       */
+/*   Updated: 2024/08/28 18:01:01 by joao-rde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #  define BUFFER_SIZE 8192
 # endif
 
-# define FD_MAX 10240
+# define FD_MAX 1024
 
 # include <stdlib.h>
 # include <unistd.h>

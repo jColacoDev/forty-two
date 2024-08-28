@@ -6,7 +6,7 @@
 /*   By: joao-rde <joao-rde@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:41:37 by joao-rde          #+#    #+#             */
-/*   Updated: 2024/05/15 19:41:41 by joao-rde         ###   ########.fr       */
+/*   Updated: 2024/08/28 17:25:37 by joao-rde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*get_next_line(int fd)
 	buffer = (char *)malloc(1 + BUFFER_SIZE * sizeof(char));
 	if (!buffer)
 		return (NULL);
-	while (!(ft_strchr(static_str, '\n')) && fd_read != 0)
+	while (!ft_strchr(static_str, '\n') && fd_read != 0)
 	{
 		fd_read = read(fd, buffer, BUFFER_SIZE);
 		if (fd_read == -1)
