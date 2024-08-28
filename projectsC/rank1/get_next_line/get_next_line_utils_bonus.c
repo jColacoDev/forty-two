@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: joao-rde <joao-rde@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/15 19:46:39 by joao-rde          #+#    #+#             */
-/*   Updated: 2024/05/15 19:46:40 by joao-rde         ###   ########.fr       */
+/*   Created: 2024/05/15 19:41:44 by joao-rde          #+#    #+#             */
+/*   Updated: 2024/05/15 19:41:45 by joao-rde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char	*ft_line_read(char *static_str)
 	line = (char *)malloc(1 + i * sizeof(char));
 	if (!line)
 		return (NULL);
-	i = 0;
+	i = -1;
 	while (static_str[++i] && static_str[i] != '\n')
 		line[i] = static_str[i];
 	if (static_str[i] == '\n')

@@ -16,6 +16,10 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 8192
+# endif
+
 size_t	ft_strlen(char *str);
 char	*get_next_line(int fd);
 char	*ft_line_read(char *src);

@@ -13,6 +13,12 @@
 #ifndef GET_NEXT_LINE_BONUS_H
 # define GET_NEXT_LINE_BONUS_H
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 8192
+# endif
+
+# define FD_MAX 10240
+
 # include <stdlib.h>
 # include <unistd.h>
 

@@ -14,29 +14,29 @@
 
 char	*get_next_line(int fd)
 {
-	char		*str_aux;
+	char		*buffer;
 	int			fd_read;
-	static char	*static_str[1024];
+	static char	*static_str[FD_MAX];
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd >= FD_MAX || BUFFER_SIZE <= 0)
+		return (NULL);
+	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!buffer)
 		return (NULL);
 	fd_read = 1;
-	str_aux = (char *)malloc(1 + BUFFER_SIZE * sizeof(char));
-	if (!str_aux)
-		return (NULL);
-	while (!(ft_strchr(static_str[fd], '\n')) && fd_read != 0)
+	while (!ft_strchr(static_str[fd], '\n') && fd_read != 0)
 	{
-		fd_read = read(fd, str_aux, BUFFER_SIZE);
+		fd_read = read(fd, buffer, BUFFER_SIZE);
 		if (fd_read == -1)
 		{
-			free(str_aux);
+			free(buffer);
 			return (NULL);
 		}
-		str_aux[fd_read] = '\0';
-		static_str[fd] = ft_strjoin(static_str[fd], str_aux);
+		buffer[fd_read] = '\0';
+		static_str[fd] = ft_strjoin(static_str[fd], buffer);
 	}
-	free(str_aux);
-	str_aux = ft_line_read(static_str[fd]);
+	free(buffer);
+	buffer = ft_line_read(static_str[fd]);
 	static_str[fd] = ft_new_static_str(static_str[fd]);
-	return (str_aux);
+	return (buffer);
 }
