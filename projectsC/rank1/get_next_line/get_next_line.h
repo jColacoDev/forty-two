@@ -6,7 +6,7 @@
 /*   By: joao-rde <joao-rde@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:41:47 by joao-rde          #+#    #+#             */
-/*   Updated: 2024/05/15 19:41:48 by joao-rde         ###   ########.fr       */
+/*   Updated: 2024/08/28 18:02:10 by joao-rde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 8192
+#  define BUFFER_SIZE 1024
 # endif
 
 size_t	ft_strlen(char *str);
