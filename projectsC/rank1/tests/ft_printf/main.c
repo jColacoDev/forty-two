@@ -3,6 +3,8 @@
 int main(void)
 {
 	ft_printf("-----------------------------\n");
+	ft_printf("------  ft_printf( )  -------\n");
+	ft_printf("-----------------------------\n");
 	ft_printf("------  TESTING AREA  -------\n");
 	ft_printf("-----------------------------\n");
 
@@ -122,46 +124,46 @@ int main(void)
 	ft_printf("-----------------------------\n");
 
 	// Test for long long types
-	// ft_printf("Long Long Integer: %lld\n", LLONG_MAX);
-	// printf("Long Long Integer: %lld\n", LLONG_MAX);
-	// ft_printf("-----------------------------\n");
+	ft_printf("Long Long Integer: %lld\n", LLONG_MAX);
+	printf("Long Long Integer: %lld\n", LLONG_MAX);
+	ft_printf("-----------------------------\n");
 
-	// ft_printf("Long Long Unsigned: %llu\n", ULLONG_MAX);
-	// printf("Long Long Unsigned: %llu\n", ULLONG_MAX);
-	// ft_printf("-----------------------------\n");
+	ft_printf("Long Long Unsigned: %llu\n", ULLONG_MAX);
+	printf("Long Long Unsigned: %llu\n", ULLONG_MAX);
+	ft_printf("-----------------------------\n");
 
 	// Test for floating point types
-	// ft_printf("Floating Point: %f\n", 3.14159);
-	// printf("Floating Point: %f\n", 3.14159);
-	// ft_printf("-----------------------------\n");
+	ft_printf("Floating Point: %f\n", 3.14159);
+	printf("Floating Point: %f\n", 3.14159);
+	ft_printf("-----------------------------\n");
 
-	// ft_printf("Scientific Notation: %e\n", 3.14159e-10);
-	// printf("Scientific Notation: %e\n", 3.14159e-10);
-	// ft_printf("-----------------------------\n");
+	ft_printf("Scientific Notation: %e\n", 3.14159e-10);
+	printf("Scientific Notation: %e\n", 3.14159e-10);
+	ft_printf("-----------------------------\n");
 
-	// ft_printf("Hexadecimal Floating Point: %a\n", 3.14159);
-	// printf("Hexadecimal Floating Point: %a\n", 3.14159);
-	// ft_printf("-----------------------------\n");
+	ft_printf("Hexadecimal Floating Point: %a\n", 3.14159);
+	printf("Hexadecimal Floating Point: %a\n", 3.14159);
+	ft_printf("-----------------------------\n");
 
     // ADITIONAL TESTS
     int chars_printed;
 
 	// Test string with maximum length
-	/*     char *max_length_string = malloc(INT_MAX);
-		memset(max_length_string, 'a', INT_MAX - 1);
-		max_length_string[INT_MAX - 1] = '\0';
-
-		ft_printf("Test 1 - Maximum length string \n");
-		chars_printed = ft_printf("[%s]\n", max_length_string);
-		printf("[%s]\n", max_length_string);
-		printf("Characters printed: [%d]\n", chars_printed);
-		printf("--------------------------------\n");
-		free(max_length_string); */
+	//     char *max_length_string = malloc(INT_MAX);
+	//	memset(max_length_string, 'a', INT_MAX - 1);
+	//	max_length_string[INT_MAX - 1] = '\0';
+	
+	//	ft_printf("Test 1 - Maximum length string \n");
+	//	chars_printed = ft_printf("[%s]\n", max_length_string);
+	//	printf("[%s]\n", max_length_string);
+	//	printf("Characters printed: [%d]\n", chars_printed);
+	//	printf("--------------------------------\n");
+	//	free(max_length_string); 
 
 	// Test string with minimum length
 	char *min_length_string = "";
 
-	ft_printf("Test 2 - Minimum length string \n");
+	ft_printf("Test 2 - Minimum length string \n"); 
 	chars_printed = ft_printf("[%s]\n", min_length_string);
 	printf("[%s]\n", min_length_string);
 	printf("Characters printed: [%d]\n", chars_printed);
@@ -193,13 +195,6 @@ int main(void)
 	printf("[%20.5s] [%-7c] [%05d]\n", str, b, i);
 	printf("Characters printed: [%d]\n", chars_printed);
 	printf("--------------------------------\n");
-
-	// Test string, char, and int together with flags
-	//ft_printf("Test 6 - String, char, and int together with flags \n");
-	//chars_printed = ft_printf("[%+s] [% c] [%+d]\n", str, b, i);
-	//printf("[%+s] [% c] [%+d]\n", str, b, i);
-	//printf("Characters printed: [%d]\n", chars_printed);
-	//printf("--------------------------------\n");
 
 	char *null_string = NULL;
 
@@ -493,14 +488,5 @@ int main(void)
     ft_printf("Null case for character: [%c]\n", '\0');
     printf("Null case for character: [%c]\n", '\0');
 
-	// printing the percent sign %
-	//ft_printf("Test 33 - Percent sign\n");
-	//chars_printed = ft_printf("Percent sign: [%#-05.4%]\n");
-	//printf("Percent sign: [%#-05.4%]\n");
-	//printf("Characters printed: [%d]\n", chars_printed);
-
-    printf("--------------------------------\n");
-	//printf("%p", ft_printf(0));
-	//ft_printf("%p", ft_printf(0));
     return 0;
 }

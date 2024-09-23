@@ -6,14 +6,14 @@
 #    By: joao-rde <joao-rde@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/08 15:12:37 by joao-rde          #+#    #+#              #
-#    Updated: 2024/05/21 19:17:51 by joao-rde         ###   ########.fr        #
+#    Updated: 2024/06/20 15:03:22 by joao-rde         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
-CC = gcc
+CC = cc
 CFLAGS= -Wall -Wextra -Werror
-SOURCES = ft_printf.c libft.c libft2.c libft3.c utils.c utils2.c utils3.c
+SOURCES = ft_printf.c libft.c libft2.c libft3.c libft4.c libft5.c utils.c utils1.c utils2.c utils3.c
 OBJECTS	= $(SOURCES:.c=.o)
 
 all: $(NAME)
@@ -24,12 +24,15 @@ $(NAME): $(OBJECTS)
 %.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
+bonus: $(NAME)
+	touch bonus
+
 clean:
-	rm -f $(OBJECTS)
+	rm -f $(OBJECTS) bonus
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus

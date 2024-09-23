@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joao-rde <joao-rde@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/09 13:28:42 by joao-rde          #+#    #+#             */
-/*   Updated: 2024/04/11 17:55:49 by joao-rde         ###   ########.fr       */
+/*   Created: 2024/05/17 17:29:00 by joao-rde          #+#    #+#             */
+/*   Updated: 2024/09/23 18:07:18 by joao-rde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_lstsize(t_list *lst)
+char	*ft_strcat(char *dest, const char *src, size_t start)
 {
-	int		count;
-	t_list	*ptr;
+	size_t	i;
 
-	ptr = lst;
-	count = 0;
-	while (ptr)
+	i = 0;
+	while (src[i] != '\0')
 	{
-		ptr = ptr->next;
-		count++;
+		dest[start + i] = src[i];
+		i++;
 	}
-	return (count);
+	dest[start + i] = '\0';
+	return (dest);
 }

@@ -6,23 +6,19 @@
 /*   By: joao-rde <joao-rde@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 15:32:22 by joao-rde          #+#    #+#             */
-/*   Updated: 2024/04/11 17:55:01 by joao-rde         ###   ########.fr       */
+/*   Updated: 2024/09/20 17:17:39 by joao-rde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_isspace(char c)
-{
-	return (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f'
-		|| c == '\r');
-}
-
 int	ft_atoi(const char *str)
 {
 	int	result;
 	int	sign;
-
+	
+	if (!str)
+		return (-1);
 	result = 0;
 	sign = 1;
 	while (str != NULL && ft_isspace(*str))

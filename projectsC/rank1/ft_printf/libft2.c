@@ -6,11 +6,41 @@
 /*   By: joao-rde <joao-rde@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 17:29:00 by joao-rde          #+#    #+#             */
-/*   Updated: 2024/05/21 18:15:52 by joao-rde         ###   ########.fr       */
+/*   Updated: 2024/09/20 17:18:40 by joao-rde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+int	ft_isspace(int c)
+{
+	return (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f'
+		|| c == '\r');
+}
+
+char	*ft_substr(const char *s, unsigned int start, size_t len)
+{
+	char	*substr;
+	size_t	i;
+
+	if (!s)
+		return (NULL);
+	if (start >= ft_strlen(s))
+		return (ft_strdup(""));
+	if (len > ft_strlen(s) - start)
+		len = ft_strlen(s) - start;
+	substr = (char *)malloc(len + 1);
+	if (!substr)
+		return (NULL);
+	i = 0;
+	while (i < len && s[start + i])
+	{
+		substr[i] = s[start + i];
+		i++;
+	}
+	substr[i] = '\0';
+	return (substr);
+}
 
 int	ft_putstr(char *s)
 {
@@ -26,76 +56,27 @@ int	ft_putstr(char *s)
 
 char	*ft_strdup(const char *s)
 {
-	size_t	len;
-	char	*dup;
+	size_t	length;
+	char	*copy;
 
-	len = ft_strlen(s);
-	dup = (char *)malloc((len + 1) * sizeof(char));
-	if (!dup)
+	length = ft_strlen(s) + 1;
+	copy = (char *)malloc(length);
+	if (copy == NULL)
 		return (NULL);
-	ft_strcpy(dup, s);
-	return (dup);
+	ft_strlcpy(copy, s, length);
+	return (copy);
 }
 
-static int	ft_count_digits_base(unsigned long long n, int base)
+char	*ft_strcat(char *dest, const char *src, size_t start)
 {
-	int	count;
+	size_t	i;
 
-	count = 0;
-	if (n == 0)
-		return (1);
-	while (n > 0)
+	i = 0;
+	while (src[i] != '\0')
 	{
-		n /= base;
-		count++;
+		dest[start + i] = src[i];
+		i++;
 	}
-	return (count);
-}
-
-char	*ft_utoa_base(unsigned long long n, int base, char *charset)
-{
-	int		len;
-	char	*str;
-
-	if (base < 2)
-		return (NULL);
-	len = ft_count_digits_base(n, base);
-	str = (char *)malloc(sizeof(char) * (len + 1));
-	if (!str)
-		return (NULL);
-	str[len] = '\0';
-	if (n == 0)
-		str[0] = charset[0];
-	while (n > 0)
-	{
-		str[--len] = charset[n % base];
-		n /= base;
-	}
-	return (str);
-}
-
-char	*ft_itoa(int n)
-{
-	int				len;
-	char			*str;
-	unsigned int	num;
-
-	num = n;
-	if (n < 0)
-		num = -n;
-	len = ft_count_digits_base(num, 10) + (n < 0);
-	str = (char *)malloc(sizeof(char) * (len + 1));
-	if (!str)
-		return (NULL);
-	str[len] = '\0';
-	if (n == 0)
-		str[0] = '0';
-	while (num > 0)
-	{
-		str[--len] = (num % 10) + '0';
-		num /= 10;
-	}
-	if (n < 0)
-		str[0] = '-';
-	return (str);
+	dest[start + i] = '\0';
+	return (dest);
 }

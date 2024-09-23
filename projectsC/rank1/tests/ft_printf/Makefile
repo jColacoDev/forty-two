@@ -1,5 +1,5 @@
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -g3
 LIB_DIR = ../../ft_printf
 LIBFTPRINTF = $(LIB_DIR)/libftprintf.a
 SRC = main.c
@@ -9,7 +9,7 @@ NAME = test_ft_printf
 $(NAME): $(OBJ) $(LIBFTPRINTF)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFTPRINTF)
 	$(MAKE) clean
-	valgrind ./test_ft_printf
+	valgrind ./test_ft_printf --leak-check=full --show-leak-kinds=all
 
 $(LIBFTPRINTF):
 	$(MAKE) -C $(LIB_DIR)

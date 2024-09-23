@@ -1,48 +1,38 @@
-#include "../../ft_printf/ft_printf.h"
+#include <fcntl.h>
+#include <stdio.h>
+#include "get_next_line.h"
 
-int main(void)
+// cc -Wall -Wextra -Werror -D BUFFER_SIZE=32 get_next_line.c get_next_line_utils.c main.c -o gnl_test
+// ./gnl_test your_file.txt
+
+int	main(int ac, char **av)
 {
-	ft_printf("-----------------------------\n");
-	ft_printf("------  TESTING AREA  -------\n");
-	ft_printf("-----------------------------\n");
+	char	*line;
+	int		fd;
+	int		line_number;
 
-    ft_printf("Hello, %s!\n", "world");
-	printf("Hello, %s!\n", "world");
-	ft_printf("-----------------------------\n");
+	if (ac != 2)
+	{
+		printf("Usage: %s <file_name>\n", av[0]);
+		return (1);
+	}
+	fd = open(av[1], O_RDONLY);
+	if (fd == -1)
+	{
+		perror("Error opening file");
+		return (1);
+	}
+	line_number = 1;
+	while ((line = get_next_line(fd)) != NULL)
+	{
+		printf("Line %02d: %s", line_number++, line);
+		free(line);
+	}
+	if (close(fd) == -1)
+	{
+		perror("Error closing file");
+		return (1);
+	}
 
-    ft_printf("Number: %d\n", 42);
-    printf("Number: %d\n", 42);
-	ft_printf("-----------------------------\n");
-
-
-    ft_printf("Hex: %x\n", 255);
-    printf("Hex: %x\n", 255);
-
-    ft_printf("HEX: %X\n", 255);
-    printf("HEX: %X\n", 255);
-
-    ft_printf("#Hex: %#x\n", 255);
-    printf("#Hex: %#x\n", 255);
-
-    ft_printf("HEX: %#X\n", 255);
-    printf("HEX: %#X\n", 255);
-	ft_printf("-----------------------------\n");
-
-    ft_printf("Pointer: %p\n", main);
-    printf("Pointer: %p\n", main);
-	ft_printf("-----------------------------\n");
-
-    ft_printf("Percent: %%\n");
-    printf("Percent: %%\n");
-	ft_printf("-----------------------------\n");
-
-    ft_printf("Signed: %+d\n", 42);
-    printf("Signed: %+d\n", 42);
-	ft_printf("-----------------------------\n");
-
-    ft_printf("Space: % d\n", 42);
-    printf("Space: % d\n", 42);
-	ft_printf("-----------------------------\n");
-
-    return 0;
+	return (0);
 }

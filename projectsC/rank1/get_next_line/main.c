@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "get_next_line.h"
 
-// gcc -Wall -Wextra -Werror -D BUFFER_SIZE=32 get_next_line.c get_next_line_utils.c main.c -o gnl_test
+// cc -Wall -Wextra -Werror -D BUFFER_SIZE=32 get_next_line.c get_next_line_utils.c main.c -o gnl_test
 // ./gnl_test your_file.txt
 
 int	main(int ac, char **av)

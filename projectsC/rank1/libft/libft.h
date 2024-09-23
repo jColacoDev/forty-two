@@ -6,7 +6,7 @@
 /*   By: joao-rde <joao-rde@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 15:09:57 by joao-rde          #+#    #+#             */
-/*   Updated: 2024/05/08 15:12:47 by joao-rde         ###   ########.fr       */
+/*   Updated: 2024/09/23 18:09:35 by joao-rde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,26 @@
 # include <stdlib.h>
 # include <string.h> // needs -lbsd |compile link to library
 # include <unistd.h>
+# include <stdarg.h>
+# include <stdbool.h>
+
+typedef struct s_list
+{
+	void			*content;
+	struct s_list	*next;
+}					t_list;
+
+typedef struct s_flags
+{
+	int			hash;
+	int			zero;
+	int			minus;
+	int			space;
+	int			plus;
+	int			width;
+	int			precision;
+	int			dot;
+}				t_flags;
 
 size_t				ft_strlcpy(char *dst, const char *src, size_t size);
 size_t				ft_strlcat(char *dst, const char *src, size_t size);
@@ -35,9 +55,17 @@ int					ft_tolower(int c);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
 int					ft_atoi(const char *str);
+int					ft_atoi_base(const char *str, const char *base);
+int					ft_isspace(int c);
+int					ft_putstr(char *s);
 
-char				*ft_strnstr(const char *haystack, const char *needle,
-						size_t len);
+unsigned long		ft_strtoul_base(const char *str, const char *base);
+
+char				*ft_strfill(char c, int width);
+char				*ft_concat(const char *str1, const char *str2, int at_beginning);
+char				*ft_strcat(char *dest, const char *src, size_t start);
+char				*ft_strpad(char *str, char pad, int len, int left_align);
+char				*ft_strnstr(const char *haystack, const char *needle,						size_t len);
 char				*ft_strchr(const char *s, int c);
 char				*ft_strrchr(const char *s, int c);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
@@ -47,6 +75,8 @@ char				**ft_split(char const *s, char c);
 char				*ft_strdup(const char *str);
 char				*ft_itoa(int n);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
+char				*ft_utoa_base(unsigned long long n, int base, char *charset, t_flags flags);
+char				*ft_strcpy(char *dst, const char *src);
 
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);
@@ -60,21 +90,15 @@ void				ft_putendl_fd(char *s, int fd);
 void				ft_putstr_fd(char *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 
-typedef struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-}					t_list;
-
-t_list				*ft_lstnew(void *content);
-void				ft_lstadd_front(t_list **lst, t_list *new);
 int					ft_lstsize(t_list *lst);
+void				ft_lstadd_front(t_list **lst, t_list *new);
 void				ft_lstadd_back(t_list **lst, t_list *new);
 void				ft_lstdelone(t_list *lst, void (*del)(void *));
 void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
+t_list				*ft_lstnew(void *content);
+t_list				*ft_lstlast(t_list *lst);
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
-t_list				*ft_lstlast(t_list *lst);
 
 #endif

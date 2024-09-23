@@ -6,44 +6,90 @@
 /*   By: joao-rde <joao-rde@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 17:29:00 by joao-rde          #+#    #+#             */
-/*   Updated: 2024/05/21 19:03:14 by joao-rde         ###   ########.fr       */
+/*   Updated: 2024/06/20 14:19:31 by joao-rde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_substr(const char *s, unsigned int start, size_t len)
+static void	ft_strtoul_base_aux(unsigned long *result, int i, const char *str,
+		const char *base)
 {
-	char	*substr;
-	size_t	i;
+	int	j;
+	int	base_len;
 
-	if (!s)
-		return (NULL);
-	if (start >= ft_strlen(s))
-		return (ft_strdup(""));
-	if (len > ft_strlen(s) - start)
-		len = ft_strlen(s) - start;
-	substr = (char *)malloc(len + 1);
-	if (!substr)
-		return (NULL);
-	i = 0;
-	while (i < len && s[start + i])
+	base_len = ft_strlen(base);
+	while (str[i])
 	{
-		substr[i] = s[start + i];
+		j = 0;
+		while (base[j] && str[i] != base[j])
+			j++;
+		if (!base[j])
+			break ;
+		*result = *result * base_len + j;
 		i++;
 	}
-	substr[i] = '\0';
-	return (substr);
 }
 
-void	*ft_memset(void *s, int c, size_t n)
+unsigned long	ft_strtoul_base(const char *str, const char *base)
 {
-	size_t			i;
-	unsigned char	*mem_byte;
+	unsigned long	result;
+	int				sign;
+	int				i;
 
-	mem_byte = s;
+	result = 0;
+	sign = 1;
 	i = 0;
-	while (i < n)
-		mem_byte[i++] = (unsigned char)c;
-	return (s);
+	while (ft_isspace(str[i]))
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		sign = 1;
+		if ((str[i] == '-'))
+			sign = -1;
+		i++;
+	}
+	ft_strtoul_base_aux(&result, i, str, base);
+	return (sign * result);
+}
+
+char	*ft_concat(const char *str1, const char *str2, int at_beginning)
+{
+	size_t	len1;
+	size_t	len2;
+	char	*result;
+
+	len1 = ft_strlen(str1);
+	len2 = ft_strlen(str2);
+	result = (char *)malloc((len1 + len2 + 1) * sizeof(char));
+	if (result == NULL)
+	{
+		exit(1);
+	}
+	if (at_beginning)
+	{
+		ft_strcat(result, str2, 0);
+		ft_strcat(result, str1, len2);
+	}
+	else
+	{
+		ft_strcat(result, str1, 0);
+		ft_strcat(result, str2, len1);
+	}
+	return (result);
+}
+
+char	*ft_strfill(char c, int width)
+{
+	char	*str;
+	int		i;
+
+	i = -1;
+	str = (char *)malloc(sizeof(char) * (width + 1));
+	if (!str)
+		return (NULL);
+	while (++i < width)
+		str[i] = c;
+	str[width] = '\0';
+	return (str);
 }

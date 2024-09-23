@@ -6,7 +6,7 @@
 /*   By: joao-rde <joao-rde@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 16:32:51 by joao-rde          #+#    #+#             */
-/*   Updated: 2024/05/21 18:15:55 by joao-rde         ###   ########.fr       */
+/*   Updated: 2024/09/16 16:55:38 by joao-rde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,33 +16,25 @@ size_t	ft_strlen(const char *s)
 {
 	int	len;
 
+	if (!s)
+		return (0);
 	len = 0;
 	while (s[len])
 		len++;
 	return (len);
 }
 
-int	ft_atoi(const char *str)
+char	*ft_strchr(const char *s, int c)
 {
-	int	result;
-	int	sign;
-
-	result = 0;
-	sign = 1;
-	while (*str == ' ' || (*str >= 9 && *str <= 13))
-		str++;
-	if (*str == '-' || *str == '+')
+	while (*s != '\0')
 	{
-		if (*str == '-')
-			sign = -1;
-		str++;
+		if (*s == (unsigned char)c)
+			return ((char *)s);
+		s++;
 	}
-	while (*str >= '0' && *str <= '9')
-	{
-		result = result * 10 + (*str - '0');
-		str++;
-	}
-	return (result * sign);
+	if ((unsigned char)c == '\0')
+		return ((char *)s);
+	return (NULL);
 }
 
 char	*ft_strpad(char *str, char pad, int len, int left_align)
@@ -75,26 +67,30 @@ char	*ft_strpad(char *str, char pad, int len, int left_align)
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*joined;
-	size_t	len1;
-	size_t	len2;
+	char	*result;
+	int		size;
 
-	if (!s1 || !s2)
+	if (!s1 && !s2)
 		return (NULL);
-	len1 = ft_strlen(s1);
-	len2 = ft_strlen(s2);
-	joined = malloc(len1 + len2 + 1);
-	if (!joined)
+	if (!s1)
+		return (ft_strdup(s2));
+	if (!s2)
+		return (ft_strdup(s1));
+	size = ft_strlen(s1) + ft_strlen(s2) + 1;
+	result = malloc(sizeof(char) * size);
+	if (!result)
 		return (NULL);
-	ft_strcpy(joined, s1);
-	ft_strcpy(joined + len1, s2);
-	return (joined);
+	ft_strlcpy(result, s1, size);
+	ft_strlcat(result, s2, size);
+	return (result);
 }
 
 char	*ft_strcpy(char *dst, const char *src)
 {
 	int	i;
-
+	
+	if (!dst || !src)
+		return (NULL); 
 	i = 0;
 	while (src[i] != '\0')
 	{
