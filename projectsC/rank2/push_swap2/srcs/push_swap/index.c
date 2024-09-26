@@ -6,11 +6,11 @@
 /*   By: joao-rde <joao-rde@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 11:48:02 by joao-rde          #+#    #+#             */
-/*   Updated: 2024/09/26 20:19:08 by joao-rde         ###   ########.fr       */
+/*   Updated: 2024/09/26 20:42:54 by joao-rde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "./../../includes/push_swap.h"
 
 static int	*sorted_array_copy(t_stack *stack)
 {

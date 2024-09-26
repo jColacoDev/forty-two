@@ -1,5 +1,4 @@
-#include "./../../includes/libft.h"
-#include "./../../includes/checker.h"
+#include "./../../includes/push_swap.h"
 
 static bool	invalid_instruction(char *op)
 {

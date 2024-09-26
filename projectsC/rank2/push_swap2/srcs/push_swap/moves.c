@@ -6,11 +6,11 @@
 /*   By: joao-rde <joao-rde@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 15:40:21 by joao-rde          #+#    #+#             */
-/*   Updated: 2024/09/26 20:19:02 by joao-rde         ###   ########.fr       */
+/*   Updated: 2024/09/26 20:43:01 by joao-rde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "./../../includes/push_swap.h"
 
 static int	between(int n, int min, int max)
 {

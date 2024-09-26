@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include "./../../includes/push_swap.h"
 
 bool	validate_int(char *elem)
 {

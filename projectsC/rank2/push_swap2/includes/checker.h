@@ -3,6 +3,7 @@
 # define CHECKER_H
 
 # include "stack.h"
+# include <stdbool.h>
 
 # define INSTRUCTIONS_BUFFER_SIZE 4096
 

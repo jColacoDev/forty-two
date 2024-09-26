@@ -6,7 +6,7 @@
 /*   By: joao-rde <joao-rde@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 15:09:57 by joao-rde          #+#    #+#             */
-/*   Updated: 2024/09/26 19:36:45 by joao-rde         ###   ########.fr       */
+/*   Updated: 2024/09/26 20:40:46 by joao-rde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,12 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include <stdbool.h>
-# include "get_next_line.h"
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1024
+# endif
+# define FD_MAX 1024
+char	*get_next_line(int fd);
 
 typedef struct s_list
 {

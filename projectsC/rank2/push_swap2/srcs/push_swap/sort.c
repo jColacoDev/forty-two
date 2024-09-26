@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joao-rde <joao-rde@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/15 19:46:32 by joao-rde          #+#    #+#             */
-/*   Updated: 2024/09/26 19:37:55 by joao-rde         ###   ########.fr       */
+/*   Created: 2021/04/06 21:08:50 by joao-rde          #+#    #+#             */
+/*   Updated: 2024/09/26 20:43:23 by joao-rde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_BONUS_H
-# define GET_NEXT_LINE_BONUS_H
+#include "./../../includes/push_swap.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1024
-# endif
+void	sort(t_stack *stack)
+{
+	t_stack	*new;
 
-# define FD_MAX 1024
-
-char	*get_next_line(int fd);
-char	*ft_line_read(char *src);
-char	*ft_new_static_str(char *start);
-
-#endif
+	if (is_sorted(stack) || stack->top <= 0)
+		return ;
+	new = initialize(stack->size);
+	if (stack->top < SORT_COMPLEX_LIMIT)
+		sort_small(stack, new);
+	else
+		sort_complex(stack, new);
+	free_stack(new);
+}

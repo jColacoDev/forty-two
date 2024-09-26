@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include "./../../includes/push_swap.h"
 
 bool	is_sorted(t_stack *stack)
 {

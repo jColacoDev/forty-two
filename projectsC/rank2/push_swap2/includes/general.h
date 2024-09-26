@@ -3,6 +3,8 @@
 # define GENERAL_H
 
 # include "stack.h"
+# include <stdbool.h>
+# include <stdlib.h>
 
 # define SPACE ' '
 # define STACK_BUFFER 1024

@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort.c                                             :+:      :+:    :+:   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joao-rde <joao-rde@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/06 21:08:50 by joao-rde          #+#    #+#             */
-/*   Updated: 2024/09/26 20:18:41 by joao-rde         ###   ########.fr       */
+/*   Created: 2021/04/05 22:25:18 by joao-rde          #+#    #+#             */
+/*   Updated: 2024/09/26 20:43:13 by joao-rde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "./../../includes/push_swap.h"
 
-void	sort(t_stack *stack)
+int	main(int argc, char *argv[])
 {
-	t_stack	*new;
+	t_stack	*stack;
 
-	if (is_sorted(stack) || stack->top <= 0)
-		return ;
-	new = initialize(stack->size);
-	if (stack->top < SORT_COMPLEX_LIMIT)
-		sort_small(stack, new);
-	else
-		sort_complex(stack, new);
-	free_stack(new);
+	stack = get_stack(argc - 1, &argv[1]);
+	index_stack(&stack);
+	sort(stack);
+	free_stack(stack);
+	return (0);
 }

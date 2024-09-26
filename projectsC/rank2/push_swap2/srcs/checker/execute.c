@@ -1,8 +1,4 @@
-
-#include <unistd.h>
-#include "stack.h"
-#include "libft.h"
-#include "general.h"
+#include "./../../includes/push_swap.h"
 
 static void	swap_stacks(char *op, t_stack *a, t_stack *b)
 {

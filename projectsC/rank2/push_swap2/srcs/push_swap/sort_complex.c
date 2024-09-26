@@ -6,11 +6,11 @@
 /*   By: joao-rde <joao-rde@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 14:50:26 by joao-rde          #+#    #+#             */
-/*   Updated: 2024/09/26 20:14:02 by joao-rde         ###   ########.fr       */
+/*   Updated: 2024/09/26 20:43:17 by joao-rde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "./../../includes/push_swap.h"
 
 void	put_in_position(t_stack *a, t_stack *b)
 {

@@ -6,11 +6,11 @@
 /*   By: joao-rde <joao-rde@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 16:52:54 by joao-rde          #+#    #+#             */
-/*   Updated: 2024/09/26 20:18:37 by joao-rde         ###   ########.fr       */
+/*   Updated: 2024/09/26 20:43:20 by joao-rde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "./../../includes/push_swap.h"
 
 static void	sort_tri(t_stack *a)
 {
