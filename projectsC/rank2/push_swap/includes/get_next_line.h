@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   insertion_sort.c                                   :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joao-rde <joao-rde@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/09 17:48:11 by joao-rde          #+#    #+#             */
-/*   Updated: 2024/09/23 19:51:29 by joao-rde         ###   ########.fr       */
+/*   Created: 2024/05/15 19:46:32 by joao-rde          #+#    #+#             */
+/*   Updated: 2024/09/26 19:37:55 by joao-rde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
-void insertion_sort(t_list **a, t_list **b) {
-    int min;
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1024
+# endif
 
-    while (ft_lstsize(*a) > 3) {
-        min = find_min(*a);
-        rotate_to_top(min, a);
-        px(a, b);
-    }
-    sort_three_in_a(a);
-    while (ft_lstsize(*b) > 0)
-        px(b, a);
-    if (ft_lstsize(*a) > 1 && *(int *)(*a)->content > *(int *)(*a)->next->content)
-        sx(a);
-}
+# define FD_MAX 1024
+
+char	*get_next_line(int fd);
+char	*ft_line_read(char *src);
+char	*ft_new_static_str(char *start);
+
+#endif

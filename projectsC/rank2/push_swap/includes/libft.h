@@ -6,7 +6,7 @@
 /*   By: joao-rde <joao-rde@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 15:09:57 by joao-rde          #+#    #+#             */
-/*   Updated: 2024/09/23 17:58:22 by joao-rde         ###   ########.fr       */
+/*   Updated: 2024/09/26 19:36:45 by joao-rde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include <stdbool.h>
+# include "get_next_line.h"
 
 typedef struct s_list
 {
@@ -58,6 +59,7 @@ int					ft_atoi(const char *str);
 int					ft_atoi_base(const char *str, const char *base);
 int					ft_isspace(int c);
 int					ft_putstr(char *s);
+int 				ft_streq(const char *s1, const char *s2);
 
 unsigned long		ft_strtoul_base(const char *str, const char *base);
 
@@ -90,15 +92,15 @@ void				ft_putendl_fd(char *s, int fd);
 void				ft_putstr_fd(char *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 
-void				ft_lstadd_front(t_list **lst, t_list *new);
 int					ft_lstsize(t_list *lst);
+void				ft_lstadd_front(t_list **lst, t_list *new);
 void				ft_lstadd_back(t_list **lst, t_list *new);
 void				ft_lstdelone(t_list *lst, void (*del)(void *));
 void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstnew(void *content);
+t_list				*ft_lstlast(t_list *lst);
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
-t_list				*ft_lstlast(t_list *lst);
 
 #endif

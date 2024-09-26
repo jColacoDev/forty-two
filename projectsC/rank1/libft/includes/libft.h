@@ -6,7 +6,7 @@
 /*   By: joao-rde <joao-rde@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 15:09:57 by joao-rde          #+#    #+#             */
-/*   Updated: 2024/09/23 18:09:35 by joao-rde         ###   ########.fr       */
+/*   Updated: 2024/09/26 19:50:23 by joao-rde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include <stdbool.h>
+# include "get_next_line.h"
 
 typedef struct s_list
 {
@@ -58,6 +59,7 @@ int					ft_atoi(const char *str);
 int					ft_atoi_base(const char *str, const char *base);
 int					ft_isspace(int c);
 int					ft_putstr(char *s);
+int 				ft_streq(const char *s1, const char *s2);
 
 unsigned long		ft_strtoul_base(const char *str, const char *base);
 

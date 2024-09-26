@@ -6,16 +6,18 @@
 #    By: joao-rde <joao-rde@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/08 15:12:37 by joao-rde          #+#    #+#              #
-#    Updated: 2024/09/23 18:01:48 by joao-rde         ###   ########.fr        #
+#    Updated: 2024/09/26 19:50:20 by joao-rde         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-SOURCES = $(shell ls *.c)
-OBJECTS	= $(SOURCES:.c=.o)
-LIBFT = libft.a
+SRC_DIR = ./srcs
+INC_DIR = ./includes
+SOURCES = $(shell find $(SRC_DIR) -name '*.c')
+OBJECTS = $(SOURCES:.c=.o)
+LIBFT = libs/libft.a
 
 all: $(NAME) clean
 
@@ -23,7 +25,7 @@ $(NAME): $(OBJECTS)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJECTS) $(LIBFT)
 
 %.o : %.c
-	$(CC) $(CFLAGS) -I. -c $< -o $@
+	$(CC) $(CFLAGS) -I$(INC_DIR) -c $< -o $@
 
 clean:
 	rm -f $(OBJECTS)
