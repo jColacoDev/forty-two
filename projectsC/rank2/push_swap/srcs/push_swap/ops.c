@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   run.c                                              :+:      :+:    :+:   */
+/*   ops.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joao-rde <joao-rde@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 17:29:06 by joao-rde          #+#    #+#             */
-/*   Updated: 2024/09/26 20:01:34 by joao-rde         ###   ########.fr       */
+/*   Updated: 2024/09/26 20:18:55 by joao-rde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	run(char *op, t_stack *a, t_stack *b)
+void	run_op(char *op, t_stack *a, t_stack *b)
 {
 	if (ft_streq(op, PA))
 		push(b, a);
@@ -33,10 +33,10 @@ void	run(char *op, t_stack *a, t_stack *b)
 	ft_putendl_fd(op, STDOUT_FILENO);
 }
 
-void	run_n(char *op, t_stack *a, t_stack *b, int n)
+void	run_ops(char *op, t_stack *a, t_stack *b, int n)
 {
 	if (n <= 0)
 		return ;
-	run(op, a, b);
-	run_n(op, a, b, n - 1);
+	run_op(op, a, b);
+	run_ops(op, a, b, n - 1);
 }

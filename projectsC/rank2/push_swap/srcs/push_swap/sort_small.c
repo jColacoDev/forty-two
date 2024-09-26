@@ -6,7 +6,7 @@
 /*   By: joao-rde <joao-rde@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 16:52:54 by joao-rde          #+#    #+#             */
-/*   Updated: 2024/09/26 19:21:56 by joao-rde         ###   ########.fr       */
+/*   Updated: 2024/09/26 20:18:37 by joao-rde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,21 @@ static void	sort_tri(t_stack *a)
 
 	arr = a->array;
 	if (arr[0] > arr[1] && arr[1] < arr[2] && arr[2] < arr[0])
-		run(SA, a, NULL);
+		run_op(SA, a, NULL);
 	else if (arr[0] < arr[1] && arr[1] < arr[2] && arr[2] > arr[0])
 	{
-		run(SA, a, NULL);
-		run(RRA, a, NULL);
+		run_op(SA, a, NULL);
+		run_op(RRA, a, NULL);
 	}
 	else if (arr[0] > arr[1] && arr[1] < arr[2] && arr[2] > arr[0])
-		run(RA, a, NULL);
+		run_op(RA, a, NULL);
 	else if (arr[0] < arr[1] && arr[1] > arr[2] && arr[2] < arr[0])
 	{
-		run(SA, a, NULL);
-		run(RA, a, NULL);
+		run_op(SA, a, NULL);
+		run_op(RA, a, NULL);
 	}
 	else if (arr[0] < arr[1] && arr[1] > arr[2] && arr[2] > arr[0])
-		run(RRA, a, NULL);
+		run_op(RRA, a, NULL);
 }
 
 static void	put_top_in_position(t_stack *a, t_stack *b)
@@ -45,12 +45,12 @@ static void	put_top_in_position(t_stack *a, t_stack *b)
 	if (to_move == top_b)
 		to_move = min(a);
 	smart_rotate_a(a, to_move);
-	run(PA, a, b);
+	run_op(PA, a, b);
 }
 
 static void	sort_tri_complex(t_stack *a, t_stack *b)
 {
-	run_n(PB, a, b, a->top - 2);
+	run_ops(PB, a, b, a->top - 2);
 	sort_tri(a);
 	while (b->top >= 0)
 		put_top_in_position(a, b);
@@ -60,7 +60,7 @@ static void	sort_tri_complex(t_stack *a, t_stack *b)
 void	sort_small(t_stack *a, t_stack *b)
 {
 	if (a->top == 1)
-		run(SA, a, NULL);
+		run_op(SA, a, NULL);
 	else if (a->top == 2)
 		sort_tri(a);
 	else

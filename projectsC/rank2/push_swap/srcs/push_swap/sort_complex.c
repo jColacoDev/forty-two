@@ -6,7 +6,7 @@
 /*   By: joao-rde <joao-rde@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 14:50:26 by joao-rde          #+#    #+#             */
-/*   Updated: 2024/09/26 19:21:56 by joao-rde         ###   ########.fr       */
+/*   Updated: 2024/09/26 20:14:02 by joao-rde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	put_in_position(t_stack *a, t_stack *b)
 	if (to_move == top_b && a->top >= 0)
 		to_move = min(a);
 	smart_rotate_a(a, to_move);
-	run(PA, a, b);
+	run_op(PA, a, b);
 }
 
 void	sort_chunk(t_stack *a, t_stack *b)
@@ -42,7 +42,7 @@ void	move_chunk(t_stack *a, t_stack *b, int min, int max)
 	while (size)
 	{
 		move_to_top(a, min, max);
-		run(PB, a, b);
+		run_op(PB, a, b);
 		size--;
 	}
 }

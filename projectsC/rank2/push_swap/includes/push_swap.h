@@ -21,8 +21,8 @@
 
 int		_index(t_stack *stack, int n);
 void	sort(t_stack *stack);
-void	run(char *op, t_stack *a, t_stack *b);
-void	run_n(char *op, t_stack *a, t_stack *b, int n);
+void	run_op(char *op, t_stack *a, t_stack *b);
+void	run_ops(char *op, t_stack *a, t_stack *b, int n);
 void	index_stack(t_stack **stack);
 void	sort_small(t_stack *a, t_stack *b);
 void	sort_complex(t_stack *a, t_stack *b);

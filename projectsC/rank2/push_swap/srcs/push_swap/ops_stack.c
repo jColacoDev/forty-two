@@ -32,7 +32,6 @@ int	max(t_stack *stack)
 	return (_max(stack->array, stack->top + 1));
 }
 
-
 static int	_min(int *array, size_t len)
 {
 	int	m;
@@ -56,7 +55,6 @@ void	push(t_stack *from, t_stack *to)
 		return ;
 	to->array[++to->top] = from->array[from->top--];
 }
-
 
 void	rotate(t_stack *stack)
 {
