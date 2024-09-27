@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joao-rde <joao-rde@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/15 19:46:32 by joao-rde          #+#    #+#             */
-/*   Updated: 2024/09/26 19:51:36 by joao-rde         ###   ########.fr       */
+/*   Created: 2021/04/05 22:25:18 by joao-rde          #+#    #+#             */
+/*   Updated: 2024/09/26 20:43:13 by joao-rde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_BONUS_H
-# define GET_NEXT_LINE_BONUS_H
+#include "./includes/push_swap.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1024
-# endif
+int	main(int argc, char *argv[])
+{
+	t_stack	*stack;
 
-# define FD_MAX 1024
-
-char	*get_next_line(int fd);
-
-#endif
+	stack = parse_stack(argc - 1, &argv[1]);
+	index_stack(&stack);
+	sort(stack);
+	free_stack(stack);
+	return (0);
+}

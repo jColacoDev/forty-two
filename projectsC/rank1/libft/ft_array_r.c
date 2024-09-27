@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort.c                                             :+:      :+:    :+:   */
+/*   ft_atoi_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joao-rde <joao-rde@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/06 21:08:50 by joao-rde          #+#    #+#             */
-/*   Updated: 2024/09/26 20:43:23 by joao-rde         ###   ########.fr       */
+/*   Created: 2024/05/17 17:29:00 by joao-rde          #+#    #+#             */
+/*   Updated: 2024/09/23 16:40:42 by joao-rde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../../includes/push_swap.h"
+#include "libft.h"
 
-void	sort(t_stack *stack)
+static void	_swap(int *a, int *b)
 {
-	t_stack	*new;
+	int	aux;
 
-	if (is_sorted(stack) || stack->top <= 0)
-		return ;
-	new = initialize(stack->size);
-	if (stack->top < SORT_COMPLEX_LIMIT)
-		sort_small(stack, new);
-	else
-		sort_complex(stack, new);
-	free_stack(new);
+	aux = *b;
+	*b = *a;
+	*a = aux;
+}
+
+void    ft_array_r(int *array, size_t size)
+{
+	static size_t	i;
+
+	if (i < size)
+	{
+		_swap(&array[i++], &array[size - 1]);
+		ft_array_r(array, size - 1);
+	}
+	i = 0;
 }

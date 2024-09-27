@@ -26,23 +26,23 @@ static int	*sorted_array_copy(t_stack *stack)
 
 void	index_stack(t_stack **stack)
 {
-	int		*copy;
-	int		i;
-	size_t	pos;
-	int		*array;
+	int	*sorted_copy;
+	int	i;
+	int	pos;
+	int	*array;
 
 	i = 0;
 	array = ft_calloc((*stack)->top + 1, sizeof(*array));
-	copy = sorted_array_copy(*stack);
+	sorted_copy = sorted_array_copy(*stack);
 	while (i <= (*stack)->top)
 	{
 		pos = 0;
-		while (copy[pos] != (*stack)->array[i])
+		while (sorted_copy[pos] != (*stack)->array[i])
 			pos++;
 		array[i++] = pos;
 	}
 	ft_memcpy((*stack)->array, array, ((*stack)->top + 1) * sizeof(*array));
-	free(copy);
+	free(sorted_copy);
 	free(array);
 }
 

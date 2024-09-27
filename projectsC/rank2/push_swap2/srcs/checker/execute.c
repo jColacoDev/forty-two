@@ -32,7 +32,7 @@ int	execute(char **instructions, t_stack *a)
 {
 	t_stack	*b;
 
-	b = initialize(a->size);
+	b = initialize_stack(a->size);
 	while (*instructions)
 	{
 		if (*instructions[0] == 's')

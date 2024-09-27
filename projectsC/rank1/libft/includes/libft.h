@@ -22,7 +22,13 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include <stdbool.h>
-# include "get_next_line.h"
+
+// GNL
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1024
+# endif
+# define FD_MAX 1024
+char	*get_next_line(int fd);
 
 typedef struct s_list
 {
@@ -30,6 +36,7 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 
+// ft_printf
 typedef struct s_flags
 {
 	int			hash;
@@ -41,6 +48,21 @@ typedef struct s_flags
 	int			precision;
 	int			dot;
 }				t_flags;
+
+int				handle_number_conversion(va_list ap, int c, t_flags flags);
+int				handle_pointer(va_list ap, t_flags flags);
+void			handle_flag_width(char **str, t_flags flags);
+void			handle_hex(char **str, char **prefix, int c, t_flags flags);
+int				handle_special_cases(va_list ap, int s, t_flags flags);
+void			handle_zero_precision(char **str, unsigned long value,
+					t_flags flags);
+
+int				ft_printf(const char *format, ...);
+
+// ft_libft
+void				ft_array_r(int *array, size_t size);
+bool				ft_atoiv(const char *str, int *n);
+int					ft_abs(int n);
 
 size_t				ft_strlcpy(char *dst, const char *src, size_t size);
 size_t				ft_strlcat(char *dst, const char *src, size_t size);

@@ -9,7 +9,8 @@ typedef struct s_stack
 	int				*array;
 }					t_stack;
 
-t_stack	*initialize(unsigned int size);
+t_stack	*initialize_stack(unsigned int size);
+
 void	swap(t_stack *stack);
 void	push(t_stack *from, t_stack *to);
 void	rotate(t_stack *stack);

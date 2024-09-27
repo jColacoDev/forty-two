@@ -1,6 +1,21 @@
 #include "./../../includes/push_swap.h"
 
-bool	validate_int(char *elem)
+t_stack	*initialize_stack(unsigned int size)
+{
+	t_stack	*stack;
+
+	stack = malloc(sizeof(*stack));
+	if (!(stack))
+		return (NULL);
+	stack->array = malloc(size * sizeof(*(stack->array)));
+	if (!(stack->array))
+		return (NULL);
+	stack->size = size;
+	stack->top = -1;
+	return (stack);
+}
+
+static bool	validate_int(char *elem)
 {
 	bool			is_int;
 	unsigned int	i;
@@ -20,17 +35,7 @@ bool	validate_int(char *elem)
 	return (!is_int);
 }
 
-void	insert_sorted(int n, int *data, int size)
-{
-	int	i;
-
-	i = size;
-	while (--i >= 0 && data[i] > n)
-		data[i + 1] = data[i];
-	data[i + 1] = n;
-}
-
-bool	already_exists(int n, t_stack *stack)
+static bool	already_exists(int n, t_stack *stack)
 {
 	int	i;
 
@@ -44,7 +49,7 @@ bool	already_exists(int n, t_stack *stack)
 	return (false);
 }
 
-int	fill_element(t_stack *stack, char *arg)
+static int	fill_element(t_stack *stack, char *arg)
 {
 	unsigned int	j;
 	int				n;
@@ -70,7 +75,7 @@ int	fill_element(t_stack *stack, char *arg)
 	return (status);
 }
 
-t_stack	*get_stack(int size, char **args)
+t_stack	*parse_stack(int size, char **args)
 {
 	unsigned int	i;
 	int				status;
@@ -80,7 +85,7 @@ t_stack	*get_stack(int size, char **args)
 		exit(0);
 	i = 0;
 	status = 0;
-	stack = initialize(STACK_BUFFER);
+	stack = initialize_stack(STACK_BUFFER);
 	while (args[i] && !status)
 		status = fill_element(stack, args[i++]);
 	if (status)
@@ -89,6 +94,6 @@ t_stack	*get_stack(int size, char **args)
 		ft_putendl_fd("Error", STDERR_FILENO);
 		exit(status);
 	}
-	reverse_array(stack->array, stack->top + 1);
+	ft_array_r(stack->array, stack->top + 1);
 	return (stack);
 }

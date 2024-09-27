@@ -15,7 +15,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 SRC_DIR = ./srcs
 INC_DIR = ./includes
-SOURCES = $(shell find $(SRC_DIR) -name '*.c')
+SOURCES = push_swap.c $(shell find $(SRC_DIR) -name '*.c')
 OBJECTS = $(SOURCES:.c=.o)
 LIBFT = libs/libft.a
 

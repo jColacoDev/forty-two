@@ -14,7 +14,9 @@ NAME = libft.a
 CC = cc
 CFLAGS= -Wall -Wextra -Werror
 INC_DIR = ./includes
-SOURCES = $(shell ls *.c)
+SRC_DIR = ./ft_printf
+SOURCES = $(shell ls *.c) $(shell find $(SRC_DIR) -name '*.c')
+
 OBJECTS	= $(SOURCES:.c=.o)
 
 all: $(NAME) clean

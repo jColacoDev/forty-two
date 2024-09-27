@@ -1,24 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_atoi_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joao-rde <joao-rde@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/05 22:25:18 by joao-rde          #+#    #+#             */
-/*   Updated: 2024/09/26 20:43:13 by joao-rde         ###   ########.fr       */
+/*   Created: 2024/05/17 17:29:00 by joao-rde          #+#    #+#             */
+/*   Updated: 2024/09/23 16:40:42 by joao-rde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../../includes/push_swap.h"
+#include "libft.h"
 
-int	main(int argc, char *argv[])
+bool	ft_atoiv(const char *str, int *n)
 {
-	t_stack	*stack;
+	int		signal;
+	bool	overflow;
 
-	stack = get_stack(argc - 1, &argv[1]);
-	index_stack(&stack);
-	sort(stack);
-	free_stack(stack);
-	return (0);
+	*n = 0;
+	signal = -1;
+	overflow = false;
+	while (ft_isspace(*str))
+		str++;
+	if (*str == '+' || *str == '-')
+		if (*str++ == '-')
+			signal = 1;
+	while (*str >= '0' && *str <= '9')
+	{
+		*n = *n * 10 - (*str++ - '0');
+		if (*n > 0 || (*n == INT_MIN && signal < 0))
+			overflow = true;
+	}
+	*n *= signal;
+	return (overflow);
 }
